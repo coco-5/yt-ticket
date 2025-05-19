@@ -1,0 +1,175 @@
+
+{
+	"indexPage":"pages/index/index",
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/notice/notice",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}
+		
+	],
+	"subPackages":[
+        {
+            "root": "packageTicket",
+			"pages": [
+				{
+					"path": "pages/passenger/passenger"
+				},
+				{
+					"path": "pages/coupon/coupon"
+				},
+				{
+					"path": "pages/seatType/seatType"
+				},
+				{
+					"path": "pages/addedValue/addedValue"
+				},
+				{
+					"path": "pages/inputInfo/inputInfo",
+					"style": {
+						"navigationBarTitleText":"填写信息"
+					}
+				},
+				{
+					"path": "pages/cut/cut",
+					"style": {
+						"disableScroll":true,
+						"navigationBarTitleText":"",
+						"navigationStyle":"custom"
+					}
+				}
+			]
+        },
+        {
+            "root": "packageBook",
+			"pages": [
+				{
+					"path": "pages/flight/one",
+					"style": {
+						"navigationBarTitleText":"航班"
+					}
+				},
+				{
+					"path": "pages/flight/round",
+					"style": {
+						"navigationBarTitleText":"航班"
+					}
+				}
+			]
+        },
+        {
+            "root": "packageUser",
+			"pages": [
+				{
+					"path": "pages/user/user"
+				},
+				{
+					"path": "pages/passenger/list",
+					"style": { 
+						"navigationBarTitleText":"乘客信息"
+					}
+				},
+				{
+					"path": "pages/passenger/add",
+					"style": { 
+						"navigationBarTitleText":"乘客信息"
+					}
+				},
+				{
+					"path": "pages/member/list",
+					"style": { 
+						"navigationBarTitleText":"会员信息"
+					}
+				},
+				{
+					"path": "pages/member/apply",
+					"style": { 
+						"navigationBarTitleText":"会员申请"
+					}
+				},
+				{
+					"path": "pages/member/binding",
+					"style": { 
+						"navigationBarTitleText":"会员申请"
+					}
+				},
+				{
+					"path": "pages/member/result",
+					"style": { 
+						"navigationBarTitleText":"会员申请"
+					}
+				},
+				{
+					"path": "pages/order/list",
+					"style": { 
+						"navigationBarTitleText":"订单"
+					}
+				},
+				{
+					"path": "pages/order/detail",
+					"style": { 
+						"navigationBarTitleText":"订单详情"
+					}
+				},
+				{
+					"path": "pages/order/code",
+					"style": { 
+						"navigationBarTitleText":"二维码核销"
+					}
+				},
+				{
+					"path": "pages/order/pay",
+					"style": { 
+						"navigationBarTitleText":"待支付"
+					}
+				},
+				{
+					"path": "pages/order/services",
+					"style": { 
+						"navigationBarTitleText":"我的增值服务"
+					}
+				},
+				{
+					"path": "pages/order/way",
+					"style": {
+						"navigationBarTitleText":"支付方式"
+					}
+				},
+				{
+					"path": "pages/card/list",
+					"style": { 
+						"navigationBarTitleText":"票卡"
+					}
+				},
+				{
+					"path": "pages/card/buy",
+					"style": { 
+						"navigationBarTitleText":"购买票卡"
+					}
+				}
+			]
+        }
+	],
+	"wxResource":{
+		
+	},
+	"globalStyle":{
+		"navigationBarBackgroundColor": "#FFF",
+		"navigationBarTextStyle": "black",
+		"backgroundColor":"#ffffff"
+	},
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+		  	"^c-(.*)": "@/components/c-$1/c-$1.vue"
+		}
+	}
+}
