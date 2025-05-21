@@ -71,8 +71,10 @@ function request(){
 
         url = `${baseConfig.proxyApi.main}${url}`
 
+        let token = uni.getStorageSync('token') || ''
+
         headerData = {
-            'Authorization': 'Bearer ' + (uni.getStorageSync('token') || '')
+            'Authorization': 'Bearer ' + token
         }
 
         if(method === 'PUT' || method === 'POST'){

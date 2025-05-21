@@ -189,12 +189,15 @@ export default{
     methods:{
         getValue:utils.getValue,
         getList(){
+            uni.showLoading()
+
             let list = [
                 this.getAdvertiseList(),
                 this.getOrderList()
             ]
 
             Promise.all(list).then(()=>{
+                uni.hideLoading()
             })
         },
         getOrderList(){

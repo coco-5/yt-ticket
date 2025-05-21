@@ -211,7 +211,7 @@ let utils = {
         uni.setStorageSync('services', data)
     },
     clearServices(){
-        uni.clearStorageSync('services')
+        uni.removeStorageSync('services')
     }
 }
 

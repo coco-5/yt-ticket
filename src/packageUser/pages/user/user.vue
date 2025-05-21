@@ -15,6 +15,7 @@
             </view>
             <view 
                 class="name"
+                @click="isShowEditName = true"
             >
                 {{ticketMember.nicknameWechat || '用户'}}
             </view>
@@ -64,6 +65,10 @@
             ></c-banner>
         </view>
 
+        <c-member-name
+            :isShoPop="isShowEditName"
+        ></c-member-name>
+
         <c-bottom
             current="2"
             :isShowNav="true"
@@ -93,6 +98,7 @@ export default {
             ticketMember:{},
             isCompare:false,
             baseInfo:{},
+            isShowEditName:false,
         }
     },
     onLoad(e) {

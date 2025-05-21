@@ -432,7 +432,8 @@ export default {
                 this.tripList.length && this.getPrice()
             }
         },
-        initSelectPassengerList(data, needDefault = false){
+        initSelectPassengerList(data){
+            //深拷贝
             let array = utils.deepCloneArray(data)
             let selectPassengerList = []
 
@@ -469,9 +470,10 @@ export default {
             }
         },
         cbConfirm(){
+            this.cbClosePassengerPop()
+            return
             let list = this.listPassenger
             let selectPassengerList = []
-
             list.forEach((item)=>{
                 if(item.class == 'checked-box'){
                     selectPassengerList.push(item)
@@ -612,7 +614,7 @@ export default {
         clearStorage(){
             utils.clearServices()
 
-            uni.clearStorageSync('addedValueList')
+            uni.removeStorageSync('addedValueList')
         },
         goPay(data, params){
             let query = {

@@ -16,7 +16,11 @@
             <text class="n">{{item.certificateTypeName}}</text>
             <text class="t">{{item.certificateNumber}}</text>
         </view>
-        <view class="edit"></view>
+        <view 
+            class="edit"
+            @click="edit"
+            v-if="isShowEdit"
+        ></view>
     </view>
 </template>
 
@@ -46,6 +50,9 @@ export default {
     methods:{
         handler(){
             this.$emit('handler',this.item)
+        },
+        edit(){
+            this.$emit('edit',this.item)
         }
     }
 }
@@ -175,18 +182,8 @@ export default {
             &.checked-box {
                 width:30rpx;
                 height:30rpx;
-                background:#FD5A26;
-                border-color:#FD5A26;
-                border-radius:50%;
-                &::after {
-                    content:'\e728';
-                    position:absolute;
-                    top:50%;
-                    left:50%;
-                    transform:translate(-50%,-50%);
-                    color:#FFF;
-                    overflow:hidden;
-                }
+                background:url('http://8.138.130.153:6003/vue/upload/static/common/ico-checked.png') no-repeat;
+                background-size:contain;
             }
         }
         .name {

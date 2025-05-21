@@ -4,7 +4,7 @@
         :style="popStyle"
     >
         <view class="hd">
-            选择乘客 
+            选择乘客1 
             <view 
                 class="close"
                 @click="closePop"
@@ -26,7 +26,9 @@
                     <c-passenger-item
                         :needAction="true"
                         :item="item"
+                        :isShowEdit="true"
                         @handler="choose"
+                        @edit="edit"
                     ></c-passenger-item>
                 </view>
             </view>

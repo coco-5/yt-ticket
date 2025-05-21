@@ -284,7 +284,7 @@ export default {
         clearStorage(){
             utils.clearServices()
 
-            uni.clearStorageSync('addedValueList')
+            uni.removeStorageSync('addedValueList')
         },
     }
 }
