@@ -70,7 +70,7 @@ export default {
     mounted(){
         this.fixBottom()
 
-        this.query = uni.createSelectorQuery()
+        this.query = uni.createSelectorQuery(this)
     },
     methods:{
         fixBottom(){
@@ -82,7 +82,6 @@ export default {
             this.$emit('cbClosePop')
         },
         submit(e){
-            console.log(9999,'name')
             if(this.timer){
                 this.timer = null
                 clearTimeout(this.timer)
@@ -100,7 +99,7 @@ export default {
                 this.query.select('#name').fields({
                     properties:['value']
                 },(res)=>{
-                    console.log(9999,res.name)
+                    console.log(9999,res)
                     uni.hideLoading()
                     //this.name = res.value
                     let name = this.name.replace(/\s/g,'')  //去除空格

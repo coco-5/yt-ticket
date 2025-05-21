@@ -58,6 +58,10 @@
 import utils from '@/utils/utils'
 export default {
     props:{
+        options:{
+            type:Object,
+            default:{}
+        },
         height:{
             type:String,
             default:'50%'
@@ -94,7 +98,7 @@ export default {
             let height = this.height
             let bottom = utils.fixIPhoneX() ? 32 : 0 
             this.popStyle = utils.fixIPhoneX() ? `height:${height}vh;` : `height:${height}vh;`
-            this.bdStyle = `height:calc(100% - 120rpx - 42rpx - 30rpx - 100rpx - ${bottom});`
+            this.bdStyle = `height:calc(100% - 120rpx - 42rpx - 30rpx - 100rpx - ${bottom}rpx - 80rpx);`
             this.ftStyle = `bottom:${bottom + 30}rpx;`
         },
         closePop(){
@@ -107,8 +111,10 @@ export default {
             this.$emit('cbChoose',item)
         },
         add(){
+            let from = `/packageTicket/pages/inputInfo/inputInfo?${utils.paramsStringify(this.options)}`
             let query = {
-                type:'add'
+                type:'add',
+                from:encodeURIComponent(from),
             }
 
             let url = `/packageUser/pages/passenger/add?${utils.paramsStringify(query)}`
@@ -118,9 +124,11 @@ export default {
             })
         },
         edit(item){
+            let from = `/packageTicket/pages/inputInfo/inputInfo?${utils.paramsStringify(this.options)}`
             let query = {
                 type:'edit',
-                id:item.id
+                id:item.id,
+                from:encodeURIComponent(from),
             }
 
             let url = `/packageUser/pages/passenger/add?${utils.paramsStringify(query)}`

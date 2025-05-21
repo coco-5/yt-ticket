@@ -183,11 +183,13 @@
         >
             <template #content>
                 <popPassenger
+                    :options="options"
                     :height="popHeight"
                     :list="listPassenger"
                     @cbChoose="cbChoose"
                     @cbConfirm="cbConfirm"
                     @cbClosePop="cbClosePassengerPop"
+                    v-if="options"
                 ></popPassenger>
             </template>
         </c-pop>
@@ -212,7 +214,7 @@ export default {
     },
     data(){
         return{
-            options:'',
+            options:{},
             listPassenger:[],   
             bottomStyle:'',
             actionsStyle:'',
@@ -470,21 +472,34 @@ export default {
             }
         },
         cbConfirm(){
-            this.cbClosePassengerPop()
-            return
-            let list = this.listPassenger
+            let list = utils.deepCloneArray(this.listPassenger)
             let selectPassengerList = []
+
             list.forEach((item)=>{
                 if(item.class == 'checked-box'){
+                    item.class = 'del'
                     selectPassengerList.push(item)
                 }
             })
 
             this.selectPassengerList = selectPassengerList
 
+            this.getPrice()
+
             this.cbClosePassengerPop()
         },
         cbDelPassenger(item){
+            uni.showModal({
+                title:'提示',
+                content:'确定删除该乘客吗？',
+                success:(res)=>{
+                    if(res.confirm){
+                        this.delPassenger(item)
+                    }
+                }
+            })
+        },
+        delPassenger(item){
             let list1 = this.selectPassengerList
             let list2 = this.listPassenger
             
@@ -560,7 +575,7 @@ export default {
 
             let options = this.options
             let addedValueList = []
-            let addedValue = uni.getStorageSync('addedValue') || {}
+            let addedValue = utils.checkSerivces(this.options,'addedValue')
             let coupon = uni.getStorageSync('coupon') || {}
             let cardCode = ''
             let cardSourceType = 0
@@ -602,10 +617,16 @@ export default {
                 params.cardCode = cardCode
                 params.cardSourceType = cardSourceType
             }
+
             getOrderSubmitApi(params).then((res)=>{
                 if(res.data.code == 200){
                     this.clearStorage()
                     this.goPay(res.data.data,params)    
+                }else{
+                    uni.showToast({
+                        title:res.data.msg,
+                        icon:'none'
+                    })
                 }
             })
 

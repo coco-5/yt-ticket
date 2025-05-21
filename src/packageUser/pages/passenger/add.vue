@@ -480,7 +480,7 @@ export default {
             })
         },
         goList(){
-            let url = `/packageUser/pages/passenger/list`
+            let url = (this.options.from && decodeURIComponent(this.options.from)) || `/packageUser/pages/passenger/list`
 
             uni.redirectTo({
                 url
