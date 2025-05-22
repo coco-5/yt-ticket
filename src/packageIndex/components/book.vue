@@ -121,7 +121,7 @@
             :onDate="showDatePopType == 'arrivalDate' ? arrivalDate : departureDate"
             @cbClosePop="cbCloseDatePop"
             @cbConfirm="cbConfirmDate"
-            v-if="arrivalDate"
+            v-if="departureDate"
         >
         </c-pop-date>
     </view>

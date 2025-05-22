@@ -121,7 +121,7 @@
         <c-bottom></c-bottom>
     </view>
 </template>
- 
+  
 <script>
 import utils from '@/utils/utils'
 import ticket from '@/types/ticket'

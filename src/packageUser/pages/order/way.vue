@@ -34,18 +34,45 @@
 </template>
 
 <script>
-import { getWechatPayApi } from '@/api/pay'
+import { getWechatPayApi, payWechatPayApi } from '@/api/pay'
 export default {
     data(){
         return{
-            options:{}
+            options:{},
+            isPaying:false,
         }
     },
     onLoad(e){
         this.options = e
     },
     methods:{
-        pay(item){
+        pay(){
+            let options = this.options
+            let params = {
+                orderType:options.orderType,
+                orderSn:options.orderSn,
+            }
+
+            if(this.isPaying) return
+
+            this.isPaying = true
+
+            uni.showLoading()
+
+            payWechatPayApi(params).then((res)=>{
+                if(res.data.code == 200){
+                    let data = res.data.data
+
+                    data && this.requestPayment(data)
+                }else{
+                    uni.showToast({
+                        title:res.data.msg,
+                        icon:'none'
+                    })
+                }
+            })
+        },
+        pay1(item){
             let options = this.options
             let params = {
                 addedValuePrice:options.addedValuePrice,
@@ -71,6 +98,39 @@ export default {
                         icon:'none'
                     })
                 }
+            })
+        },
+        requestPayment(params){
+            uni.requestPayment({
+                timeStamp:params.timeStamp,
+                nonceStr:params.nonceStr,
+                package:params.package,
+                signType:params.signType,
+                paySign:params.paySign,
+                success:(res)=>{
+                    uni.showToast({
+                        title:'支付成功',
+                        icon:'none'
+                    })
+
+                    setTimeout(()=>{
+                        this.go()
+                    },2000)
+
+                    this.isPaying = false
+                    console.log(9999,'success res',res)  
+                },
+                fail:(res)=>{
+                    this.isPaying = false
+                    console.log(9999,'fail res',res)
+                }
+            })
+        },
+        go(){
+            let url = ``
+
+            uni.redirectTo({
+                url,
             })
         }
     }

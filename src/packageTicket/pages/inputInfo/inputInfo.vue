@@ -15,7 +15,12 @@
                     <view class="item">
                         <view class="label">退票</view>
                         <view class="text">退票请参照退票规则处理</view>
-                        <view class="notice">购票退票须知</view>
+                        <view 
+                            class="notice"
+                            @click="isShoPop = true"
+                        >
+                            购票退票须知
+                        </view>
                     </view>
                     <view class="item">
                         <view class="label">入闸</view>
@@ -194,6 +199,14 @@
             </template>
         </c-pop>
 
+        <c-rule-pop
+            :isShoPop="isShoPop"
+            :ruleIndex="ruleIndex"
+            :options="options"
+            @cbClosePop="cbClosePop"
+            @cbChangeIndex="cbChangeIndex"
+        ></c-rule-pop>
+
         <c-bottom
             :style="bottomStyle"
         ></c-bottom>
@@ -230,11 +243,15 @@ export default {
             mop:0,
             ruleInfo:{},
             vipList:[],
-            agreementChecked:false
+            agreementChecked:false,
+            isShoPop:false,
+            ruleIndex:0,
         }
     },
     onLoad(e){
         this.options = e
+
+        this.orderType = 'ticket'
 
         this.getList()
 
@@ -580,6 +597,7 @@ export default {
             let cardCode = ''
             let cardSourceType = 0
 
+            // 增值服务
             if(addedValue){
                 for(let p in addedValue){
                     addedValueList.push({
@@ -587,6 +605,18 @@ export default {
                         num:addedValue[p].value,
                     })
                 }
+            }
+
+            //本页服务
+            if(this.vipList.length){
+                this.vipList.forEach((item=>{
+                    if(item.checked){
+                        addedValueList.push({
+                            addedValueId:item.id,
+                            num:item.value    
+                        })    
+                    }
+                }))
             }
 
             if(coupon){
@@ -611,6 +641,7 @@ export default {
                 },
                 passengerList:this.selectPassengerList,
                 toPortCode:options.toPortCode,
+                orderType:this.orderType,
             }
 
             if(cardCode){
@@ -620,8 +651,10 @@ export default {
 
             getOrderSubmitApi(params).then((res)=>{
                 if(res.data.code == 200){
+                    let data = res.data.data
+
                     this.clearStorage()
-                    this.goPay(res.data.data,params)    
+                    this.goPay(data,params)    
                 }else{
                     uni.showToast({
                         title:res.data.msg,
@@ -650,7 +683,7 @@ export default {
                 discountRmbPrice:data.discountRmbPrice,
                 addedValuePrice:data.addedValuePrice,
                 addedValueRmbPrice:data.addedValueRmbPrice,
-                orderType:'ticket',
+                orderType:this.orderType,
             }
             let url = `/packageUser/pages/order/way?${utils.paramsStringify(query)}`
 
@@ -776,7 +809,6 @@ export default {
 
             list.forEach((item)=>{
                 if(item.checked){
-                    console.log(1111,'item',item.value)
                     mop += Number(item.value) * Number(item.price)
                     rmb += Number(item.value) * Number(item.rmbPrice)
                 }
@@ -788,7 +820,13 @@ export default {
             }
 
             this.getPrice()
-        }
+        },
+        cbClosePop(){
+            this.isShoPop = false
+        },
+        cbChangeIndex(index){
+            this.ruleIndex = index
+        },
     }
 }
 </script>
