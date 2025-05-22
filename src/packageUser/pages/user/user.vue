@@ -65,9 +65,48 @@
             ></c-banner>
         </view>
 
-        <c-member-name
-            :isShoPop="isShowEditName"
-        ></c-member-name>
+        <c-pop
+            height="50vh"
+            :isShow="isShowEditName"
+            @cbClosePop="cbClosePop"
+        >
+            <template #content>
+                <view 
+                    class="c-pop-name"
+                    :style="bottomStyle"
+                >
+                    <view class="hd">编辑用户名</view>
+                    <form @submit="submit">
+                        <view class="bd">
+                            <view class="name-wrap">
+                                <!-- <view 
+                                    class="clear" 
+                                    @click.stop="name = ''" 
+                                    v-if="name"
+                                ></view> -->
+                                <input 
+                                    id="name" 
+                                    name="nickname" 
+                                    type="nickname" 
+                                    v-model="name" 
+                                    placeholder="请输入昵称" 
+                                    maxlength="16" 
+                                />
+                            </view>
+                            <view class="tips">4-16个字符，支持中英文和数字</view>
+                        </view>
+                        <view class="ft">
+                            <button 
+                                class="btn" 
+                                form-type="submit"
+                            >
+                                确定
+                            </button>
+                        </view>
+                    </form>
+                </view>
+            </template>
+        </c-pop>
 
         <c-bottom
             current="2"
@@ -99,6 +138,8 @@ export default {
             isCompare:false,
             baseInfo:{},
             isShowEditName:false,
+            bottomStyle:'',
+            name:'',
         }
     },
     onLoad(e) {
@@ -106,17 +147,28 @@ export default {
 
         this.isCompare = utils.compareBaseSDKVersion('2.21.2')
 
+        this.query = uni.createSelectorQuery(this)
+
+        this.fixBottom()
+
         this.getMemberInfo()
 
         this.getList()
     },
     methods:{
+        fixBottom(){
+            let height = utils.fixIPhoneX() ? 68 : 0
+
+            this.bottomStyle = `padding-bottom:${height}rpx; height:calc(50vh - ${height}rpx);`
+        },
         getMemberInfo(){
             this.ticketMember = uni.getStorageSync('ticketMember') || {}
 
             if(this.ticketMember.avatarWechat){
                 this.ticketMember.avatarWechat = this.ticketMember.avatarWechat.replace('http://','https://')
             }
+
+            this.name = this.ticketMember.nicknameWechat
         },
         getList(){
             let list = [
@@ -198,19 +250,79 @@ export default {
         },
         update(params){
             params.id = this.ticketMember.id
-            memberUpdateApi(params).then((res)=>{
-                if(res.data.code == 200){
-                    uni.showToast({
-                        title:'修改成功',
-                        icon:'none'
-                    })
-                }else{
-                    uni.showToast({
-                        title:res.data.msg,
-                        icon:'none'
-                    })
-                }
+
+            return new Promise((resolve)=>{
+                memberUpdateApi(params).then((res)=>{
+                    if(res.data.code == 200){
+                        uni.showToast({
+                            title:'修改成功',
+                            icon:'none'
+                        })
+                    }else{
+                        uni.showToast({
+                            title:res.data.msg,
+                            icon:'none'
+                        })
+                    }
+                    resolve()
+                })
             })
+        },
+        submit(e){
+            if(this.timer){
+                this.timer = null
+                clearTimeout(this.timer)
+            }
+
+            if(!this.name){
+                uni.showToast({
+                    title:'请输入昵称',
+                    icon:'none'
+                })
+                return
+            }
+
+            uni.showLoading()
+
+            // 延迟等待是否昵称验证通过
+            this.timer = setTimeout(()=>{
+                this.query.select('#name').fields({
+                    properties:['value']
+                },(res)=>{
+                    uni.hideLoading()
+                    //this.name = res.value
+                    let name = this.name.replace(/\s/g,'')  //去除空格
+                    let len = utils.getByteLen(name)
+                    let reg = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/
+                    if(!name) return uni.showToast({title:'请输入昵称',icon:'none'})
+
+
+                    if(!reg.test(name)){
+                        uni.showToast({title:'昵称不支持特殊字符',icon:'none'}) 
+                        return     
+                    } 
+
+                    if(len > 16){
+                        uni.showToast({title:'最大字符数超过16，一个汉字有两个字符哦～',icon:'none'}) 
+                        return
+                    }
+
+                    if(len < 4){
+                        uni.showToast({title:'最少字符数超过4，一个汉字有两个字符哦～',icon:'none'}) 
+                        return
+                    }
+
+                    this.update({
+                        nicknameWechat:name
+                    }).then(()=>{
+                        this.ticketMember.nicknameWechat = name
+                        this.cbClosePop()    
+                    })
+                }).exec()
+            },1000)
+        },
+        cbClosePop(){
+            this.isShowEditName = false
         }
     }
 }
@@ -342,6 +454,69 @@ export default {
             height:25rpx;
             background:url('http://8.138.130.153:6003/vue/upload/static/my/icon-arrow.png') no-repeat;
             background-size:contain;
+        }
+    }
+}
+
+.c-pop-name {
+    box-sizing:border-box;
+    position:relative;
+    .hd {
+        position:relative;
+        height:148rpx;
+        line-height:148rpx;
+        color:#000;
+        font-size:40rpx;
+        font-weight:500;
+        text-align:center;
+    }
+    .bd {
+        margin:0 60rpx;
+        .name-wrap{ 
+            border-bottom: #eee 1rpx solid; 
+            color: #1D1E18; 
+            overflow: hidden; 
+            padding-top: 32rpx; 
+            padding-bottom:16rpx;
+            position: relative; 
+            .clear { 
+                position: absolute; 
+                width: 30rpx; 
+                height: 30rpx; 
+                background: url(https://oss-hqwx-edu24ol.hqwx.com/miniapp/hq_live/tiku-active-close.png) no-repeat; 
+                background-size: 100%; 
+                right: 0; 
+                top: 55rpx; 
+            }
+        }
+        #name{ 
+            width: 600rpx; 
+            height: 80rpx; 
+            font-size: 28rpx; 
+            line-height: 80rpx;
+        }
+        .tips{ 
+            color: #9C9C9C; 
+            font-size: 24rpx; 
+            margin-top: 24rpx; 
+        }
+    }
+    .ft {
+        position:absolute;
+        bottom:0;
+        left:50%;
+        transform:translateX(-50%);
+        width:664rpx;
+        .btn {
+    
+            width:100%;
+            height:100rpx;
+            line-height:100rpx;
+            background:linear-gradient(87deg, #FFA63F, #EB5628);
+            border-radius:50rpx;
+            color:#FFF;
+            font-size:34rpx;
+            text-align:center;
         }
     }
 }

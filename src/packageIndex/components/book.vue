@@ -288,6 +288,7 @@ export default {
         },
         showDatePop(item){
             this.showDatePopType = item.type
+            console.log(9999,'t',item.type)
             this.isShowDatePop = true
         },
         exChangeDest(){

@@ -7,8 +7,11 @@
 
         <div class="list">
             <div class="item-list">
-                <view class="hd">
-                    <view class="text">去程 {{options.sailDate}}</view>
+                <view 
+                    class="hd"
+                    @click="showDatetPop('departureDate')"
+                >
+                    <view class="text">去程 {{departureDate}}</view>
                     <view class="ico"></view>
                 </view>
                 <view 
@@ -35,8 +38,11 @@
                 </view>
             </div>
             <div class="item-list arrival">
-                <view class="hd">
-                    <view class="text">返程 {{options.sailDateReturn}}</view>
+                <view 
+                    class="hd"
+                    @click="showDatetPop('arrivalDate')"
+                >
+                    <view class="text">返程 {{arrivalDate}}</view>
                     <view class="ico"></view>
                 </view>
                 <view 
@@ -73,6 +79,16 @@
             </view>
         </view>
 
+        <c-pop-date
+            height="70vh"
+            :isShow="isShowDatePop"
+            :onDate="showDatePopType == 'departureDate' ? departureDate : arrivalDate"
+            @cbClosePop="cbCloseDatePop"
+            @cbConfirm="cbConfirmDate"
+            v-if="departureDate"
+        >
+        </c-pop-date>
+
         <c-bottom></c-bottom>
     </view>
 </template>
@@ -93,17 +109,27 @@ export default {
             dest:{},
             listDeparture:[],
             listArrival:[],
-            listStyle:''
+            listStyle:'',
+            isShowDatePop:false,
+            showDatePopType:'arrivalDate',
+            arrivalDate:'',
+            departureDate:'',
         }
     },
     onLoad(e){
         this.options = e
+
+        this.initDate()
 
         this.fixedListStyle()
 
         this.getList()
     },
     methods:{
+        initDate(){
+            this.arrivalDate = this.options.sailDateReturn
+            this.departureDate = this.options.sailDate
+        },
         fixedListStyle(){
             let a = utils.fixIPhoneX() ? 48 : 0
 
@@ -123,8 +149,8 @@ export default {
         getRoundTicketList(){
             let options = this.options
             let params = {
-                sailDate:options.sailDate,
-                sailDateReturn:options.sailDateReturn,
+                sailDate:this.departureDate,
+                sailDateReturn:this.arrivalDate,
                 fromPortCode:options.fromPortCode,
                 toPortCode:options.toPortCode,
                 isRoundTrip:1,
@@ -209,7 +235,26 @@ export default {
             uni.navigateTo({
                 url
             })
-        }
+        },
+        showDatetPop(type){
+            this.isShowDatePop = true
+
+            this.showDatePopType = type
+        },
+        cbCloseDatePop(){
+            this.isShowDatePop = false
+        },
+        cbConfirmDate(date){
+            if(this.showDatePopType == 'arrivalDate'){
+                this.arrivalDate = date
+            }else{
+                this.departureDate = date
+            }  
+
+            this.getList()
+            
+            this.cbCloseDatePop()
+        },
     }
 }
 

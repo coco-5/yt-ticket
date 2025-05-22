@@ -6,36 +6,64 @@
                 :class="tabIndex == index ? 'on' : ''"
                 v-for="(item,index) in tabs"
                 :key="index"
-                @click="tabIndex = index"
+                @click="change(index)"
             >
                 <text>{{item.name}}</text>
             </view>
         </view>
 
-        <view 
-            class="list"
-            v-if="list.length"
-        >
-            <c-ticket-card
-                class="item"
-                type="buy"
-                :item="item"
-                v-for="(item,index) in list"
-                :key="index"
-                @showMore="showMore"
-                @goBuy="goBuy"
-                @showPortMore="showPortMore"
-            ></c-ticket-card>
+        <view v-show="tabIndex == 0">
+            <view 
+                class="list"
+                v-if="list.length"
+            >
+                <c-ticket-card
+                    class="item"
+                    type="buy"
+                    :item="item"
+                    v-for="(item,index) in list"
+                    :key="index"
+                    @showMore="showMore"
+                    @goBuy="goBuy"
+                    @showPortMore="showPortMore"
+                ></c-ticket-card>
+            </view>
+    
+            <view 
+                class="no-content"
+                v-else
+            >
+                <c-no-content
+                    type="file"
+                    title="暂无可用票卡"
+                ></c-no-content>    
+            </view>
         </view>
 
-        <view 
-            class="no-content"
-            v-else
-        >
-            <c-no-content
-                type="file"
-                title="暂无可用票卡"
-            ></c-no-content>    
+        <view v-show="tabIndex == 1">
+            
+            <view 
+                class="list"
+                v-if="list.length"
+            >
+                <c-ticket-card
+                    class="item"
+                    type="buy"
+                    :item="item"
+                    v-for="(item,index) in listExpire"
+                    :key="index"
+                ></c-ticket-card>
+            </view>
+    
+            <view 
+                class="no-content"
+                v-else
+            >
+                <c-no-content
+                    type="file"
+                    title="暂无历史票卡"
+                ></c-no-content> 
+            </view>
         </view>
 
         <c-ticket-pop
@@ -80,6 +108,7 @@ export default {
             ],
             tabIndex:0, 
             list:[],
+            listExpire:[],
             bottomStyle:''    
         }
     },
@@ -105,6 +134,8 @@ export default {
                 getTicketCardMyListApi(params).then((res)=>{
                     if(res.data.code == 200){
                         let data = res.data.data || []
+                        let list = []
+                        let listExpire = []
 
                         data.forEach((item)=>{
                             item.ticketCardProtList = item.ticketProtList
@@ -123,9 +154,17 @@ export default {
                             item.et = item.validateEndTime.split(' ')[0]
                             item.et = item.et.replace(/\-/g,'.')
                             item.showMore = false
+
+                            if(item.isExpire){
+                                listExpire.push(item)
+                            }else{
+                                list.push(item)
+                            }
                         })
 
-                        this.list = data
+                        this.list = list
+
+                        this.listExpire = listExpire
                     }
                 })
             })
@@ -157,6 +196,9 @@ export default {
             uni.navigateTo({
                 url
             })
+        },
+        change(index){
+            this.tabIndex = index
         }
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <view 
         class="c-card"
-        :class="type ? 'card-'+type : 'card'"
+        :class="(type ? 'card-'+type : 'card') + (item.isExpire ? ' disabled' : '')"
     >
         <view 
             class="main"
@@ -70,6 +70,7 @@
                 <view 
                     class="btn"
                     @click="goBuy"
+                    v-if="!item.isExpire"
                 >
                     购买
                 </view>
@@ -268,6 +269,20 @@ export default {
             }
         }
     }
+    &.disabled {
+        filter:grayscale(100%);
+        &::before {
+            content:' ';
+            position:absolute;
+            top:0;
+            right:0;
+            z-index:2;
+            width:99rpx;
+            height:99rpx;
+            background:url('http://8.138.130.153:6003/vue/upload/static/ticketCard/invalid.png') no-repeat;
+            background-size:contain;
+        }
+    }
 }
 
 .card {
@@ -325,18 +340,6 @@ export default {
         }
         &.cash {
             background:#E3F1FE;
-        }
-    }
-    &.disabled {
-        &::before {
-            content:' ';
-            position:absolute;
-            top:0;
-            right:0;
-            width:99rpx;
-            height:99rpx;
-            background:url('http://8.138.130.153:6003/vue/upload/static/ticketCard/invalid.png') no-repeat;
-            background-size:contain;
         }
     }
 }

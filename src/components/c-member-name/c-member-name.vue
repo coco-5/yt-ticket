@@ -137,67 +137,66 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.c {
+.c-pop-name {
     box-sizing:border-box;
     position:relative;
-}
-.hd {
-    position:relative;
-    height:148rpx;
-    line-height:148rpx;
-    color:#000;
-    font-size:40rpx;
-    font-weight:500;
-    text-align:center;
-}
-
-.bd {
-    margin:0 60rpx;
-    .name-wrap{ 
-        border-bottom: #eee 1rpx solid; 
-        color: #1D1E18; 
-        overflow: hidden; 
-        padding-top: 32rpx; 
-        padding-bottom:16rpx;
-        position: relative; 
-        .clear { 
-            position: absolute; 
-            width: 30rpx; 
-            height: 30rpx; 
-            background: url(https://oss-hqwx-edu24ol.hqwx.com/miniapp/hq_live/tiku-active-close.png) no-repeat; 
-            background-size: 100%; 
-            right: 0; 
-            top: 55rpx; 
+    .hd {
+        position:relative;
+        height:148rpx;
+        line-height:148rpx;
+        color:#000;
+        font-size:40rpx;
+        font-weight:500;
+        text-align:center;
+    }
+    .bd {
+        margin:0 60rpx;
+        .name-wrap{ 
+            border-bottom: #eee 1rpx solid; 
+            color: #1D1E18; 
+            overflow: hidden; 
+            padding-top: 32rpx; 
+            padding-bottom:16rpx;
+            position: relative; 
+            .clear { 
+                position: absolute; 
+                width: 30rpx; 
+                height: 30rpx; 
+                background: url(https://oss-hqwx-edu24ol.hqwx.com/miniapp/hq_live/tiku-active-close.png) no-repeat; 
+                background-size: 100%; 
+                right: 0; 
+                top: 55rpx; 
+            }
+        }
+        #name{ 
+            width: 600rpx; 
+            height: 80rpx; 
+            font-size: 28rpx; 
+            line-height: 80rpx;
+        }
+        .tips{ 
+            color: #9C9C9C; 
+            font-size: 24rpx; 
+            margin-top: 24rpx; 
         }
     }
-	#name{ 
-        width: 600rpx; 
-        height: 80rpx; 
-        font-size: 28rpx; 
-        line-height: 80rpx;
-    }
-    .tips{ 
-        color: #9C9C9C; 
-        font-size: 24rpx; 
-        margin-top: 24rpx; 
-    }
-}
-.ft {
-    position:absolute;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:664rpx;
-    .btn {
-
-        width:100%;
-        height:100rpx;
-        line-height:100rpx;
-        background:linear-gradient(87deg, #FFA63F, #EB5628);
-        border-radius:50rpx;
-        color:#FFF;
-        font-size:34rpx;
-        text-align:center;
+    .ft {
+        position:absolute;
+        bottom:0;
+        left:50%;
+        transform:translateX(-50%);
+        width:664rpx;
+        .btn {
+    
+            width:100%;
+            height:100rpx;
+            line-height:100rpx;
+            background:linear-gradient(87deg, #FFA63F, #EB5628);
+            border-radius:50rpx;
+            color:#FFF;
+            font-size:34rpx;
+            text-align:center;
+        }
     }
 }
 </style>
