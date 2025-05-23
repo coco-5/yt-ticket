@@ -381,7 +381,7 @@ export default {
             transform:translate(-50%,-50%);
             width:54rpx;
             height:54rpx;
-            background:url('http://8.138.130.153:6003/vue/upload/static/index/qh2.png') no-repeat;
+            background:url('https://newxcx.soofound.cn/vue/upload/static/index/qh2.png') no-repeat;
             background-size:contain;
         }
     }
@@ -409,7 +409,7 @@ export default {
     }
     &.one {
         .tab {
-            background:url('http://8.138.130.153:6003/vue/upload/static/index/border2.png') no-repeat top right;
+            background:url('https://newxcx.soofound.cn/vue/upload/static/index/border2.png') no-repeat top right;
             background-size:contain;
             .item {
                 &:last-child{
@@ -423,7 +423,7 @@ export default {
     }
     &.round {
         .tab {
-            background:url('http://8.138.130.153:6003/vue/upload/static/index/border1.png') no-repeat top left;
+            background:url('https://newxcx.soofound.cn/vue/upload/static/index/border1.png') no-repeat top left;
             background-size:contain;
             .item {
                 &:nth-child(1){
@@ -434,7 +434,7 @@ export default {
         }
         .destination {
             .exchange {
-                background-image:url('http://8.138.130.153:6003/vue/upload/static/index/qh.png');    
+                background-image:url('https://newxcx.soofound.cn/vue/upload/static/index/qh.png');    
             }
         }
     }

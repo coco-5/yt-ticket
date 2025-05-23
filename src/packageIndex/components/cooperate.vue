@@ -43,7 +43,7 @@ export default {
                     sort:0,
                     display:1, 
                     title:'优惠购票',
-                    icon:'http://8.138.130.153:6003/vue/upload/static/index/ad-pkgp.png'
+                    icon:'https://newxcx.soofound.cn/vue/upload/static/index/ad-pkgp.png'
                 }
             ],
             isShowCard:false       

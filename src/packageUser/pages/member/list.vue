@@ -183,41 +183,41 @@ export default {
             font-size:22rpx;
         }
         &.zhuaoka {
-            background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/type-bg1.png');
+            background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/type-bg1.png');
             color:#FFF;
             .name {
                 .ico {
-                    background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/type-id1.png');    
+                    background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/type-id1.png');    
                 }
             }
             .line {
-                background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/type-border1.png'); 
+                background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/type-border1.png'); 
             }
         }
         &.zhuaojumen {
-            background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/type-bg2.png');
+            background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/type-bg2.png');
             color:#9E6F3D;
             .name {
                 .ico {
-                    background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/type-id2.png');    
+                    background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/type-id2.png');    
                 }
 
             }
             .line {
-                background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/type-border2.png'); 
+                background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/type-border2.png'); 
             }
         }
         &.disabled {
             position:relative;
-            background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/type-bg3.png');
+            background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/type-bg3.png');
             color:rgba(0,0,0,.5);
             .name {
                 .ico {
-                    background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/type-id3.png');    
+                    background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/type-id3.png');    
                 }
             }
             .line {
-                background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/type-border3.png'); 
+                background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/type-border3.png'); 
             }
             &::before {
                 content:' ';
@@ -226,7 +226,7 @@ export default {
                 right:10rpx;
                 width:99rpx;
                 height:99rpx;
-                background:url('http://8.138.130.153:6003/vue/upload/static/ticketCard/invalid.png') no-repeat;
+                background:url('https://newxcx.soofound.cn/vue/upload/static/ticketCard/invalid.png') no-repeat;
                 background-size:contain;
             }
         }

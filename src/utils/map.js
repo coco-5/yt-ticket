@@ -51,9 +51,9 @@ export default {
         '格式为“8位或10位数字或(10位数字+1位英文字母)”'
     ],
     certificateTypeImages:[
-        'http://8.138.130.153:6003/vue/upload/static/passenger/type2.jpg',
-        'http://8.138.130.153:6003/vue/upload/static/passenger/type3.jpg',
-        'http://8.138.130.153:6003/vue/upload/static/passenger/type5.jpg',
-        'http://8.138.130.153:6003/vue/upload/static/passenger/type7.jpg'
+        'https://newxcx.soofound.cn/vue/upload/static/passenger/type2.jpg',
+        'https://newxcx.soofound.cn/vue/upload/static/passenger/type3.jpg',
+        'https://newxcx.soofound.cn/vue/upload/static/passenger/type5.jpg',
+        'https://newxcx.soofound.cn/vue/upload/static/passenger/type7.jpg'
     ],
 }

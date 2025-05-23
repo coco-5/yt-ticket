@@ -395,7 +395,7 @@ export default {
                     transform:translate(-50%,-50%);
                     width:60rpx;
                     height:60rpx;
-                    background-image:url('http://8.138.130.153:6003/vue/upload/static/common/2294174703026.png');
+                    background-image:url('https://newxcx.soofound.cn/vue/upload/static/common/2294174703026.png');
                     background-size:contain;
                 }
             }

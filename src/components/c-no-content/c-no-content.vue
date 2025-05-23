@@ -47,17 +47,17 @@ export default {
     }
     &.file {
         .icon {
-            background-image:url('http://8.138.130.153:6003/vue/upload/static/empty/empty3.png');
+            background-image:url('https://newxcx.soofound.cn/vue/upload/static/empty/empty3.png');
         }
     }
     &.note {
         .icon {
-            background-image:url('http://8.138.130.153:6003/vue/upload/static/empty/empty1.png');
+            background-image:url('https://newxcx.soofound.cn/vue/upload/static/empty/empty1.png');
         }
     }
     &.box {
         .icon {
-            background-image:url('http://8.138.130.153:6003/vue/upload/static/empty/empty2.png');
+            background-image:url('https://newxcx.soofound.cn/vue/upload/static/empty/empty2.png');
         }
     }
 }

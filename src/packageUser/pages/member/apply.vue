@@ -89,7 +89,7 @@ export default {
                 margin-right:12rpx;
                 width:35rpx;
                 height:27rpx;
-                background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/id.png');    
+                background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/id.png');    
                 background-repeat:no-repeat;
                 background-position:top center;
                 background-size:contain;

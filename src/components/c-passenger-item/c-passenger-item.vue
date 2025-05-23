@@ -182,7 +182,7 @@ export default {
             &.checked-box {
                 width:30rpx;
                 height:30rpx;
-                background:url('http://8.138.130.153:6003/vue/upload/static/common/ico-checked.png') no-repeat;
+                background:url('https://newxcx.soofound.cn/vue/upload/static/common/ico-checked.png') no-repeat;
                 background-size:contain;
             }
         }
@@ -204,7 +204,7 @@ export default {
             transform:translate(-50%,-50%);
             width:28rpx;
             height:28rpx;
-            background:url('http://8.138.130.153:6003/vue/upload/static/passenger/icon-edit.png') no-repeat;
+            background:url('https://newxcx.soofound.cn/vue/upload/static/passenger/icon-edit.png') no-repeat;
             background-size:contain;
             //icon-edit
         }

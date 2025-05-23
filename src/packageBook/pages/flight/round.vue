@@ -275,7 +275,7 @@ export default {
         .hd {
             height:83rpx;
             line-height:83rpx;
-            background:url('http://8.138.130.153:6003/vue/upload/static/round/tab1.png') no-repeat;
+            background:url('https://newxcx.soofound.cn/vue/upload/static/round/tab1.png') no-repeat;
             background-size:contain;
             color:#FFF;
             font-size:30rpx;
@@ -290,14 +290,14 @@ export default {
                 margin-left:8rpx;
                 width:11rpx;
                 height:19rpx;
-                background:url('http://8.138.130.153:6003/vue/upload/static/round/ico-arrow.png') no-repeat;
+                background:url('https://newxcx.soofound.cn/vue/upload/static/round/ico-arrow.png') no-repeat;
                 background-size:contain;
             }
         }
         &.arrival {
             margin-left:10rpx;
             .hd {
-                background-image:url('http://8.138.130.153:6003/vue/upload/static/round/tab2.png');
+                background-image:url('https://newxcx.soofound.cn/vue/upload/static/round/tab2.png');
             }
         }
         .bd {

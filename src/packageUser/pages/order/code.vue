@@ -448,7 +448,7 @@ export default {
 <style lang="scss" scoped>
 .page {
     min-height:100vh;
-    background:url('http://8.138.130.153:6003/vue/upload/static/order/bg.png') #F8F8F8 no-repeat;
+    background:url('https://newxcx.soofound.cn/vue/upload/static/order/bg.png') #F8F8F8 no-repeat;
     background-size:contain;
 }
 
@@ -475,7 +475,7 @@ export default {
                 transform:translateX(-50%);
                 width:17rpx;
                 height:13rpx;
-                background:url('http://8.138.130.153:6003/vue/upload/static/common/active.png') no-repeat;
+                background:url('https://newxcx.soofound.cn/vue/upload/static/common/active.png') no-repeat;
                 background-size:contain;
             }
         }
@@ -502,7 +502,7 @@ export default {
             margin:0 20rpx;
             width:103rpx;
             height:5rpx;
-            background:url('http://8.138.130.153:6003/vue/upload/static/order/car2.png') no-repeat;
+            background:url('https://newxcx.soofound.cn/vue/upload/static/order/car2.png') no-repeat;
             background-size:cover;
         }
     }
@@ -547,11 +547,11 @@ export default {
         background-size:contain;
         &.prev {
             left:80rpx;
-            background-image:url('http://8.138.130.153:6003/vue/upload/static/order/icon-right.png');
+            background-image:url('https://newxcx.soofound.cn/vue/upload/static/order/icon-right.png');
         }
         &.next {
             right:80rpx;
-            background-image:url('http://8.138.130.153:6003/vue/upload/static/order/icon-left.png');
+            background-image:url('https://newxcx.soofound.cn/vue/upload/static/order/icon-left.png');
         }
         &.disabled {
             opacity:.5;
@@ -585,7 +585,7 @@ export default {
     margin:40rpx auto;
     width:642rpx;
     height:2rpx;
-    background:url('http://8.138.130.153:6003/vue/upload/static/common/ewdsfdsfe.png') no-repeat;
+    background:url('https://newxcx.soofound.cn/vue/upload/static/common/ewdsfdsfe.png') no-repeat;
     background-size:cover;
 }
 
@@ -633,7 +633,7 @@ export default {
                 transform:translateX(-50%);
                 width:81rpx;
                 height:5rpx;
-                background:url('http://8.138.130.153:6003/vue/upload/static/order/car3.png') no-repeat;
+                background:url('https://newxcx.soofound.cn/vue/upload/static/order/car3.png') no-repeat;
                 background-size:contain;
             }
         }
@@ -709,7 +709,7 @@ export default {
             transform:translateY(-50%);
             width:21rpx;
             height:11rpx;
-            background:url('http://8.138.130.153:6003/vue/upload/static/order/icon.png') no-repeat;
+            background:url('https://newxcx.soofound.cn/vue/upload/static/order/icon.png') no-repeat;
             background-size:contain;
         }
     }

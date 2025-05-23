@@ -107,25 +107,25 @@ export default {
             background-repeat:no-repeat;
             background-size:contain;
             &.home {
-                background-image:url("http://8.138.130.153:6003/vue/upload/static/bottom/home.png");
+                background-image:url("https://newxcx.soofound.cn/vue/upload/static/bottom/home.png");
             }
             &.order {
-                background-image:url("http://8.138.130.153:6003/vue/upload/static/bottom/order.png");
+                background-image:url("https://newxcx.soofound.cn/vue/upload/static/bottom/order.png");
             }
             &.my {
-                background-image:url("http://8.138.130.153:6003/vue/upload/static/bottom/my.png");
+                background-image:url("https://newxcx.soofound.cn/vue/upload/static/bottom/my.png");
             }
         }
         &.on {
             color:#ED602B;
             .home {
-                background-image:url("http://8.138.130.153:6003/vue/upload/static/bottom/home-active.png");
+                background-image:url("https://newxcx.soofound.cn/vue/upload/static/bottom/home-active.png");
             }
             .order {
-                background-image:url("http://8.138.130.153:6003/vue/upload/static/bottom/order-active.png");
+                background-image:url("https://newxcx.soofound.cn/vue/upload/static/bottom/order-active.png");
             }
             .my {
-                background-image:url("http://8.138.130.153:6003/vue/upload/static/bottom/my-active.png");
+                background-image:url("https://newxcx.soofound.cn/vue/upload/static/bottom/my-active.png");
             }
         }
     }

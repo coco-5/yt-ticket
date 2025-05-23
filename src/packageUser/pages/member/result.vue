@@ -122,17 +122,17 @@ export default {
     }
     &.successBinding {
         .icon {
-            background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/succes.png');
+            background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/succes.png');
         }
     }
     &.errorBinding {
         .icon {
-            background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/close.png');
+            background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/close.png');
         }
     }
     &.successApply {
         .icon {
-            background-image:url('http://8.138.130.153:6003/vue/upload/static/vip/succes.png');
+            background-image:url('https://newxcx.soofound.cn/vue/upload/static/vip/succes.png');
         }
     }
 }

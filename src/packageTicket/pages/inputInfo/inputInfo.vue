@@ -843,7 +843,7 @@ export default {
 <style lang="scss" scoped>
 .page {
     min-height:100vh;
-    background:url('http://8.138.130.153:6003/vue/upload/static/order/bg.png') #F8F8F8 no-repeat;
+    background:url('https://newxcx.soofound.cn/vue/upload/static/order/bg.png') #F8F8F8 no-repeat;
     background-size:contain;
 }
 
@@ -1018,7 +1018,7 @@ export default {
             margin-left:16rpx;
             width:14rpx;
             height:25rpx;
-            background:url('http://8.138.130.153:6003/vue/upload/static/my/icon-arrow.png') no-repeat;
+            background:url('https://newxcx.soofound.cn/vue/upload/static/my/icon-arrow.png') no-repeat;
             background-size:contain;
         }
     }
@@ -1097,7 +1097,7 @@ export default {
             border:1px solid rgba(0, 0, 0, 0.4);
             &.on {
                 border-color:#FF7143;
-                background:url('http://8.138.130.153:6003/vue/upload/static/common/ico-checked.png') no-repeat;
+                background:url('https://newxcx.soofound.cn/vue/upload/static/common/ico-checked.png') no-repeat;
                 background-size:contain;
             }
         }

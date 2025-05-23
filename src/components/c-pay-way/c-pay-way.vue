@@ -38,14 +38,14 @@ export default {
                     type:'wxupay', 
                     name:'微信支付（澳门币支付）'
                     ,desc:'微信安全支付',
-                    ico:'http://8.138.130.153:6003/vue/upload/static/paylist/wxzf.png'
+                    ico:'https://newxcx.soofound.cn/vue/upload/static/paylist/wxzf.png'
                 },
                 {
                     currencyType:2,
                     type:'wxpay', 
                     name:'微信支付',
                     desc:'微信安全支付',
-                    ico:'http://8.138.130.153:6003/vue/upload/static/paylist/wxzf.png'
+                    ico:'https://newxcx.soofound.cn/vue/upload/static/paylist/wxzf.png'
                 },
             ]
         }

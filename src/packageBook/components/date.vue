@@ -209,14 +209,14 @@ export default{
             transform:translateY(-50%);
             width:26rpx;
             height:74rpx;
-            background:url('http://8.138.130.153:6003/vue/upload/static/ticket/icon-time-left.png') no-repeat;
+            background:url('https://newxcx.soofound.cn/vue/upload/static/ticket/icon-time-left.png') no-repeat;
             background-size:contain;
         }
         .calc {
             margin:5rpx auto;
             width:30rpx;
             height:30rpx;
-            background:url('http://8.138.130.153:6003/vue/upload/static/ticket/icon-time.png') no-repeat;
+            background:url('https://newxcx.soofound.cn/vue/upload/static/ticket/icon-time.png') no-repeat;
             background-size:contain;
         }
         .text {
