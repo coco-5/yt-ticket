@@ -127,7 +127,7 @@ export default {
             })
         },
         go(){
-            let url = ``
+            let url = `/packageUser/pages/order/list`
 
             uni.redirectTo({
                 url,

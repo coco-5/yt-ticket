@@ -109,6 +109,7 @@ export default {
                 getTicketCardListApi({}).then((res)=>{
                     if(res.data.code == 200){
                         let data = res.data.rows 
+                        let list = []
                         //type 类型 1-次卡；2-现金卡（澳门币）；3-折扣卡；4 - 现金卡(人民币)
 
                         data.length > 0 && data.forEach((item)=>{
@@ -126,9 +127,13 @@ export default {
                             item.st = item.st.replace(/\-/g,'.')
                             item.et = item.validateEndTime.split(' ')[0]
                             item.et = item.et.replace(/\-/g,'.')
+
+                            if(!item.isExpire){
+                                list.push(item)
+                            }
                         })
 
-                        this.list = data
+                        this.list = list
 
                         resolve(data)
                     }
