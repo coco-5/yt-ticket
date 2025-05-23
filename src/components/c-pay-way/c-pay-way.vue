@@ -35,7 +35,7 @@ export default {
             payList:[
                 {
                     currencyType:1,
-                    type:'wxpay', 
+                    type:'wxupay', 
                     name:'微信支付（澳门币支付）'
                     ,desc:'微信安全支付',
                     ico:'http://8.138.130.153:6003/vue/upload/static/paylist/wxzf.png'
@@ -43,7 +43,7 @@ export default {
                 {
                     currencyType:2,
                     type:'wxpay', 
-                    name:'微信支付（澳门币支付）',
+                    name:'微信支付',
                     desc:'微信安全支付',
                     ico:'http://8.138.130.153:6003/vue/upload/static/paylist/wxzf.png'
                 },

@@ -42,7 +42,7 @@ export default {
                     type:'card',
                     sort:0,
                     display:1, 
-                    title:'票卡购票',
+                    title:'优惠购票',
                     icon:'http://8.138.130.153:6003/vue/upload/static/index/ad-pkgp.png'
                 }
             ],

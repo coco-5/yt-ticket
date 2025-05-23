@@ -20,3 +20,13 @@ export function payWechatPayApi(params){
         })
     })
 }
+
+export function upayWechatPayApi(params){
+    params = Object.assign({}, params)
+
+    return new Promise((resolve, reject)=>{
+        _this.$http.post(`/pay/uepay/wechatPay`,params).then((res)=>{
+            resolve(res)
+        })
+    })
+}

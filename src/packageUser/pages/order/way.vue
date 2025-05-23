@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { getWechatPayApi, payWechatPayApi } from '@/api/pay'
+import { getWechatPayApi, payWechatPayApi, upayWechatPayApi } from '@/api/pay'
 export default {
     data(){
         return{
@@ -46,7 +46,7 @@ export default {
         this.options = e
     },
     methods:{
-        pay(){
+        pay(item){
             let options = this.options
             let params = {
                 orderType:options.orderType,
@@ -59,7 +59,14 @@ export default {
 
             uni.showLoading()
 
-            payWechatPayApi(params).then((res)=>{
+            if(item.currencyType == 1){
+                this.mopPay(params)
+            }else if(item.currencyType == 2){
+                this.rmbPay(params)
+            }
+        },
+        mopPay(params){
+            upayWechatPayApi(params).then((res)=>{
                 if(res.data.code == 200){
                     let data = res.data.data
 
@@ -72,26 +79,21 @@ export default {
                 }
             })
         },
-        pay1(item){
-            let options = this.options
-            let params = {
-                addedValuePrice:options.addedValuePrice,
-                addedValueRmbPrice:options.addedValueRmbPrice,
-                currencyType:options.currencyType,
-                discountPrice:options.discountPrice,
-                discountRmbPrice:options.discountRmbPrice,
-                orderId:options.orderId,
-                orderSn:options.orderSn,
-                orderType:options.orderType,
-                price:options.price,
-                rmbPrice:options.rmbPrice,
-                rmbTicketPrice:options.rmbTicketPrice,
-                ticketPrice:options.ticketPrice,
-            }
-
-            getWechatPayApi(params).then((res)=>{
+        rmbPay(params){
+            payWechatPayApi(params).then((res)=>{
                 if(res.data.code == 200){
+                    let data = res.data.data
 
+                    data && this.requestPayment(data).then(()=>{
+                        uni.showToast({
+                            title:'支付成功',
+                            icon:'none'
+                        })
+
+                        setTimeout(()=>{
+                            this.go()
+                        },2000)
+                    })
                 }else{
                     uni.showToast({
                         title:res.data.msg,
@@ -101,27 +103,25 @@ export default {
             })
         },
         requestPayment(params){
-            uni.requestPayment({
-                timeStamp:params.timeStamp,
-                nonceStr:params.nonceStr,
-                package:params.package,
-                signType:params.signType,
-                paySign:params.paySign,
-                success:(res)=>{
-                    uni.showToast({
-                        title:'支付成功',
-                        icon:'none'
-                    })
+            return new Promise((resolve,reject)=>{
+                uni.requestPayment({
+                    timeStamp:params.timeStamp,
+                    nonceStr:params.nonceStr,
+                    package:params.package,
+                    signType:params.signType,
+                    paySign:params.paySign,
+                    success:(res)=>{
+                        resolve()
+                    },
+                    fail:(res)=>{
+                        reject()
+                    },
+                    complete:()=>{
+                        uni.hideLoading()
+                        this.isPaying = false
+                    }
+                })
 
-                    setTimeout(()=>{
-                        this.go()
-                    },2000)
-
-                    this.isPaying = false
-                },
-                fail:(res)=>{
-                    this.isPaying = false
-                }
             })
         },
         go(){
