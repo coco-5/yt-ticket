@@ -279,7 +279,7 @@ export default {
             Promise.all(list).then((res)=>{
                 setTimeout(()=>{
                     this.getPrice()
-                },10)
+                },500)
                 
                 uni.hideLoading()
             })
@@ -302,6 +302,8 @@ export default {
                         let tripList = []
 
                         tripList.push(this.returnTripData(data,0))
+
+                        console.log(9999,111,tripList)
 
                         this.detail = data
 
@@ -727,15 +729,22 @@ export default {
         getPrice(){
             let num = this.selectPassengerList.length
             let double = Number(this.options.isRoundTrip) ? 2 : 1
-            let tripList = this.tripList[0]
+            let target = {}
             let addedPrice = this.addedData ? this.addedData.mop : 0
             let addedRmbPrice = this.addedData ? this.addedData.rmb : 0
             let discountPrice = this.couponData ? this.couponData.discountPrice : 0
             let discountRmbPrice = this.couponData ? this.couponData.discountRmbPrice : 0
             let vipPrice = this.vipData ? this.vipData.mop : 0
             let vipRmbPrice = this.vipData ? this.vipData.rmb : 0
-            let price1 = (tripList && tripList.price1) ? Number(tripList.price1) : 0
-            let price5 = (tripList && tripList.price5) ? Number(tripList.price5) : 0
+            let listSpace = this.listSpace || []
+
+            for(let i=0; i<listSpace.length; i++){
+                if(listSpace[i].type == this.options.type){
+                    target = listSpace[i]
+                }
+            }
+            let price1 = (target && target.price1) ? Number(target.price1) : 0
+            let price5 = (target && target.price5) ? Number(target.price5) : 0
 
             this.mop = price1 * double * num + addedPrice + vipPrice - discountPrice
 

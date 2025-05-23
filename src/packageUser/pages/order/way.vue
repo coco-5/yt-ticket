@@ -118,11 +118,9 @@ export default {
                     },2000)
 
                     this.isPaying = false
-                    console.log(9999,'success res',res)  
                 },
                 fail:(res)=>{
                     this.isPaying = false
-                    console.log(9999,'fail res',res)
                 }
             })
         },
@@ -177,11 +175,8 @@ export default {
 .price {
     margin:20rpx auto 0;
     .right {
-        box-sizing:border-box;
-        padding-top:16rpx;
         font-size:24rpx;
         .t {
-            line-height:30rpx;
         }
         .m {
             color:#FE6630;
