@@ -156,6 +156,23 @@
 					}
 				}
 			]
+        },
+        {
+            "root": "packageNotice",
+			"pages": [
+				{
+					"path": "pages/flight/flight",
+					"style": {
+						"navigationBarTitleText":"航班信息"
+					}
+				},
+				{
+					"path": "pages/stop/stop",
+					"style": {
+						"navigationBarTitleText":"航班状态"
+					}
+				}
+			]
         }
 	],
 	"wxResource":{

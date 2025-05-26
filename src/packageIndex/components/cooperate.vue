@@ -69,18 +69,36 @@ export default {
                 this.isShowCard = true
                 return
             }else{
+                let notice = ['航班信息','停航通知']
+                if(notice.includes(item.title)){
+                    let url = `/packageNotice/pages/`
+
+                    if(item.title == '航班信息'){
+                        url += `flight/flight`  
+                    }else if(item.title == '停航通知'){
+                        url += `stop/stop`
+                    }
+                    
+
+                    uni.navigateTo({
+                        url,
+                    })
+                    return
+                }
+                
                 if(item.link){
                     let url = `/pages/notice/notice?url=${item.link}`
 
                     uni.navigateTo({
-                        url:url
+                        url,
                     })
+
+                    return
                 }else{
                     uni.showToast({
                         title:'即将上线，敬请期待',
                         icon:'none'
                     })
-
                 }
             }
         },
