@@ -45,7 +45,7 @@ export default {
     onLoad(e){
         this.options = e
     },
-    methods:{
+    methods:{ 
         pay(item){
             let options = this.options
             let params = {
@@ -70,7 +70,9 @@ export default {
                 if(res.data.code == 200){
                     let data = res.data.data
 
-                    data && this.requestPayment(data)
+                    data && this.requestPayment(data).then(()=>{
+                        
+                    })
                 }else{
                     uni.showToast({
                         title:res.data.msg,

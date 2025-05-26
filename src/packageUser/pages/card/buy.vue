@@ -129,6 +129,11 @@ export default {
                     let data = res.data.data || {}
 
                     this.goPay(item,data)
+                }else{
+                    uni.showToast({
+                        title:res.data.msg,
+                        icon:'none'
+                    })
                 }
             })
         },

@@ -535,6 +535,7 @@ export default {
                     break
                 }
             }
+            this.getPrice()
         },
         getVipList(){
             let options = this.options
