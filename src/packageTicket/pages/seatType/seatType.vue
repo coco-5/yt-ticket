@@ -66,7 +66,10 @@
                     </view> -->
                 </view>
                 <view class="price">
-                    <view class="item-price mop">
+                    <view 
+                        class="item-price mop"
+                        style="display:none;"
+                    >
                         <text class="t1">MOP</text>
                         <text class="t2">{{item.price1}}</text>
                     </view>

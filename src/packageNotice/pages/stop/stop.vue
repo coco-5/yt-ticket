@@ -1,5 +1,7 @@
 <template>
     <view class="page">
+        11111
+        <!-- 
         <view class="title">
             粤通船务航班状态
         </view>
@@ -33,16 +35,26 @@
             <view class="p">
                 氹仔客运码头：00853 28850272
             </view>
-        </view>
+        </view> -->
     </view>
 </template>
 
+<script>
+export default {
+    data(){
+        return{
+            options:''
+        }
+    },
+    onLoad(e){
+        this.options = e
+    }
+}
+</script>
 
 <style lang="scss" scoped>
 .page {
-    margin-bottom:24rpx;
     padding:0 40rpx;
-    min-height:100vh;
     .title {
         padding:40 0rpx;
         font-size:48rpx;

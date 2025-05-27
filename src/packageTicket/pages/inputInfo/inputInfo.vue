@@ -160,6 +160,7 @@
                     </view>
                     <view 
                         class="item mop"
+                        style="display:none"
                         @click="submitPay(1)"
                     >
                         <view class="price">MOP<text>{{mop}}</text></view>
@@ -1119,7 +1120,8 @@ export default {
             top:50%;
             right:20rpx;
             transform:translateY(-50%);
-            width:500rpx;
+            //width:500rpx;
+            width:250rpx;
             height:90rpx;
             background:#FFF4F1;
             border-radius:45rpx;
@@ -1128,7 +1130,8 @@ export default {
             font-size:22rpx;
             .item {
                 display:inline-block;
-                width:50%;
+                //width:50%;
+                width:100%;
                 height:90rpx;
                 font-size:22rpx;
                 text-align:center;

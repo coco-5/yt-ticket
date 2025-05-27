@@ -343,9 +343,7 @@ export default{
 
 <style lang="scss" scoped>
 .page {
-    margin-bottom:24rpx;
     padding:0 40rpx;
-    min-height:100vh;
     .title {
         padding:40 0rpx;
         font-size:48rpx;

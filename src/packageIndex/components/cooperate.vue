@@ -69,7 +69,7 @@ export default {
                 this.isShowCard = true
                 return
             }else{
-                let notice = ['航班信息','停航通知']
+                let notice = ['航班信息','停航通知','购退票须知']
                 if(notice.includes(item.title)){
                     let url = `/packageNotice/pages/`
 
@@ -77,6 +77,8 @@ export default {
                         url += `flight/flight`  
                     }else if(item.title == '停航通知'){
                         url += `stop/stop`
+                    }else if(item.title == '购退票须知'){
+                        url += `refund/refund`
                     }
                     
 

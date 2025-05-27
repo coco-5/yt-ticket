@@ -52,6 +52,7 @@
                     <view 
                         class="price-item mop"
                         v-if="item.minPrice"
+                        style="display:none;"
                     >
                         <text>MOP</text>
                         <text class="p">{{item.minPrice}}</text>

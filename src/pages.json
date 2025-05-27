@@ -163,13 +163,19 @@
 				{
 					"path": "pages/flight/flight",
 					"style": {
-						"navigationBarTitleText":"航班信息"
+						"navigationBarTitleText":"11航班信息"
 					}
 				},
 				{
 					"path": "pages/stop/stop",
 					"style": {
-						"navigationBarTitleText":"航班状态"
+						"navigationBarTitleText":"22停航通知"
+					}
+				},
+				{
+					"path": "pages/refund/refund",
+					"style": {
+						"navigationBarTitleText":"33购退票须知"
 					}
 				}
 			]

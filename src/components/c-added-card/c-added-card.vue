@@ -38,7 +38,10 @@
                 </view>
             </view>
             <view class="price-box">
-                <view class="price-item">
+                <view 
+                    class="price-item"
+                    style="display:none;"
+                >
                     <text class="unit">MOP</text>
                     <text class="text">{{item.price}}</text>
                 </view>
