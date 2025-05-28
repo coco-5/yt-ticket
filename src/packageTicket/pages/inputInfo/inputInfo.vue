@@ -304,8 +304,6 @@ export default {
 
                         tripList.push(this.returnTripData(data,0))
 
-                        console.log(9999,111,tripList)
-
                         this.detail = data
 
                         this.tripList = tripList
@@ -631,7 +629,7 @@ export default {
             let params = {
                 type:options.type,
                 addedValueList,
-                channel:1,//userStroe.user?.merchantAcitve ? 2 : 1,
+                channel:4,//userStroe.user?.merchantAcitve ? 2 : 1,
                 currencyType,
                 fromPortCode:options.fromPortCode,
                 isRoundTrip:options.isRoundTrip,

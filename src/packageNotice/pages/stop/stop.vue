@@ -1,7 +1,5 @@
 <template>
     <view class="page">
-        11111
-        <!-- 
         <view class="title">
             粤通船务航班状态
         </view>
@@ -35,7 +33,7 @@
             <view class="p">
                 氹仔客运码头：00853 28850272
             </view>
-        </view> -->
+        </view>
     </view>
 </template>
 
