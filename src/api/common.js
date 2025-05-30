@@ -59,3 +59,13 @@ export function getMyOrderListApi(params){
     })
 }
 
+export function getMaterialApi(id,params){
+    params = Object.assign({}, params)
+
+    return new Promise((resolve, reject)=>{
+        _this.$http.get(`/material/${id}`,params).then((res)=>{
+            resolve(res)
+        })
+    })
+}
+

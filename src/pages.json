@@ -179,9 +179,9 @@
 					}
 				},
 				{
-					"path": "pages/a/a",
+					"path": "pages/index/index",
 					"style": {
-						"navigationBarTitleText":"a"
+						"navigationBarTitleText":""
 					}
 				}
 			]

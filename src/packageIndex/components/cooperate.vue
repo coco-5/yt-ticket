@@ -70,7 +70,9 @@ export default {
                 return
             }else{
                 let notice = ['航班信息','停航通知','购退票须知']
-                if(notice.includes(item.title)){
+
+                console.log(9999,'type',item.type)
+                /* if(notice.includes(item.title)){
                     let url = `/packageNotice/pages/`
 
                     if(item.title == '航班信息'){
@@ -82,6 +84,16 @@ export default {
                     }
                     
 
+                    uni.navigateTo({
+                        url,
+                    })
+                    return
+                } */
+
+                let url = ``
+
+                if(item.type == 1){
+                    url = `/packageNotice/pages/index/index?id=${item.id}`
                     uni.navigateTo({
                         url,
                     })

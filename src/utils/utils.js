@@ -212,7 +212,10 @@ let utils = {
     },
     clearServices(){
         uni.removeStorageSync('services')
-    }
+    },
+    replaceHTMLChar(str){
+        return str.replace(/&amp;/g, "&").replace(/&quot;/g, "\"").replace(/&mdash;/g, "—").replace(/&nbsp;/g, " ").replace(/&times;/g, "×").replace(/&divide;/g, "÷").replace(/(&ldquo;|&rdquo;)/g, "\"").replace(/(&lsquo;|&rsquo;)/g, "\'").replace(/&rarr;/g, "→").replace(/&ge;/g, "≥").replace(/&le;/g, "≤").replace(/&Omega;/g, "Ω").replace(/&Oslash;/g, "Ø").replace(/&plusmn;/g, "±").replace(/&sum;/g, "∑").replace(/&middot;/g, "·").replace(/&ang;/g, "∠").replace(/&deg;/g, "°").replace(/&radic;/g, "√").replace(/&hellip;/g, "……").replace(/&gt;/g, ">").replace(/&sup3;/g, "³").replace(/&sup2;/g, "²").replace(/&lt;/g, "<").replace(/font-family: \"[^\"]*\"/g, "").replace(/<p [^>]*>/g, "<p>").replace(/<span [^>]*>/g, "<span>").replace(/<img/g, "<img style='max-width:100%;height:auto;'").replace(/<p><br\/><\/p>/g, " ");
+    },
 }
 
 export default utils
