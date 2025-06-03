@@ -148,15 +148,17 @@
                 <view class="text">订单总金额</view>
                 <view 
                     class="btn"
-                    v-if="options.fromPortCode === 'MAO' || options.toPortCode === 'MAO'"
+                    v-if="options.fromPortCode == 'MAO' || options.toPortCode == 'MAO'"
                 >
-                    <view 
-                        class="item"
-                        @click="submitPay(2)"
-                        v-if="options.fromPortCode == 'MAO' || options.toPortCode == 'MAO'"
-                    >
-                        <view class="price">RMB<text>{{rmb}}</text></view>
-                        <view class="t">提交订单</view>
+                    <view class="item">
+                        <c-login
+                            @go="submitPay(2)"
+                        >
+                            <template #content>
+                                <view class="price">RMB<text>{{rmb}}</text></view>
+                                <view class="t">提交订单</view>
+                            </template>
+                        </c-login>
                     </view>
                     <view 
                         class="item mop"
@@ -216,7 +218,6 @@
 
 <script>
 import utils from '@/utils/utils'
-import ticket from '@/types/ticket'
 import popPassenger from '@/packageTicket/components/pop-passenger'
 import { getOneWayTicketDetailApi, getRuleApi, getRoundTicketDetailApi } from '@/api/ticket'
 import { getPassengerListApi } from '@/api/passenger'
@@ -247,6 +248,7 @@ export default {
             agreementChecked:false,
             isShoPop:false,
             ruleIndex:0,
+            needLogin:true,
         }
     },
     onLoad(e){
@@ -664,8 +666,6 @@ export default {
                     })
                 }
             })
-
-            return
         },
         clearStorage(){
             utils.clearServices()
@@ -835,7 +835,7 @@ export default {
         },
         cbChangeIndex(index){
             this.ruleIndex = index
-        },
+        }
     }
 }
 </script>
@@ -1124,14 +1124,18 @@ export default {
             background:#FFF4F1;
             border-radius:45rpx;
             border:1px solid #FD5A26;
-            color:#FD5A26;
+            color:#FD5A26!important;
             font-size:22rpx;
             .item {
                 display:inline-block;
+                margin:0;
+                padding:0;
                 //width:50%;
                 width:100%;
                 height:90rpx;
                 font-size:22rpx;
+                border:0 none;
+                color:#FD5A26!important;
                 text-align:center;
                 vertical-align:middle;
                 overflow:hidden;
@@ -1139,6 +1143,7 @@ export default {
                     margin:8rpx 0 0;
                     height:40rpx;
                     line-height:40rpx;
+                    color:#FD5A26!important;
                     font-size:22rpx;
                     text {
                         display:inline-block;
@@ -1148,6 +1153,10 @@ export default {
                 }
                 .t {
                     margin-top:-4rpx;
+                    height:40rpx;
+                    line-height:40rpx;
+                    font-size:22rpx;
+                    color:#FD5A26!important;
                 }
                 &.mop {
                     background:linear-gradient(87deg, #FFA63F, #EB5628);
@@ -1165,5 +1174,9 @@ export default {
             }
         }
     }
+}
+
+::v-deep .wrap-actions .actions .btn .item {
+
 }
 </style>

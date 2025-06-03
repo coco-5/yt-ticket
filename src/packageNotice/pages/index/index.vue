@@ -37,8 +37,6 @@ export default {
 
                     data.content = utils.replaceHTMLChar(data.content)
                     data.content = this.formatImg(data.content)
-
-                    console.log(9999,'data',data.content)
                     this.content = data || {}
                     
                 }

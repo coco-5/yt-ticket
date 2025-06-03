@@ -69,10 +69,15 @@
                 </view>
                 <view 
                     class="btn"
-                    @click="goBuy"
                     v-if="!item.isExpire"
                 >
-                    购买
+                    <c-login
+                        @go="goBuy"
+                    >
+                        <template #content>
+                            购买
+                        </template>
+                    </c-login>
                 </view>
             </view>
             <view 

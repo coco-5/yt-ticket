@@ -239,6 +239,8 @@ export default {
                         let url = json.url
                         this.update({
                             avatarWechat:url
+                        }).then(()=>{
+                            this.ticketMember.avatarWechat = url
                         })
                     }
                     uni.hideLoading()
