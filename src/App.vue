@@ -31,7 +31,6 @@
                     success:res=>{
                         if(res.errMsg == 'login:ok'){
                             let code = res.code
-                            //return
                             wxLoginApi({
                                 code,
                             }).then((res)=>{

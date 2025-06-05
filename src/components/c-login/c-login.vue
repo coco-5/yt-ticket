@@ -20,6 +20,7 @@
 
 <script>
 import { memberUpdateApi } from '@/api/passenger'
+import { mobileApi } from '@/api/member'
 export default {
     props:{
     },
@@ -65,26 +66,29 @@ export default {
             }
 
             let params = {
-                modEncryptedData: encodeURIComponent(e.detail.encryptedData),
+                //modEncryptedData: encodeURIComponent(e.detail.encryptedData),
                 //电话号码的加密串
-                modIv: encodeURIComponent(e.detail.iv),
+                //modIv: encodeURIComponent(e.detail.iv),
+                code:e.detail.code,
             }
 
-            this.update({
-                mobile:1,
-            }).then(()=>{
-                uni.showToast({
-                    title:'登录成功',
-                    icon:'none'
-                })
-
+            mobileApi(params).then((res)=>{
                 this.isLoading = false
-
-                setTimeout(()=>{
-                    this.go()
-                },2000)
-            }).catch(()=>{
-                this.isLoading = false
+                uni.hideLoading()
+                if(res.data.code == 200){
+                    uni.showToast({
+                        title:'登录成功',
+                        icon:'none'
+                    })
+                    setTimeout(()=>{
+                        this.go()
+                    },2000)
+                }else{
+                    uni.showToast({
+                        title:res.data.msg,
+                        icon:'none'
+                    })
+                }
             })
         },
         go(){

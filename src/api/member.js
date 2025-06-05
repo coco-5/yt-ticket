@@ -30,4 +30,14 @@ export function getBaseInfoApi(params){
         })
     })
 }
+
+export function mobileApi(params){
+    params = Object.assign({}, params)
+
+    return new Promise((resolve, reject)=>{
+        _this.$http.get(`/member/mobile`,params).then((res)=>{
+            resolve(res)
+        })
+    })
+}
 //
