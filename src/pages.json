@@ -13,8 +13,13 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
+		},
+		{
+			"path": "pages/channel/channel",
+			"style": {
+				"navigationBarTitleText": ""
+			}
 		}
-		
 	],
 	"subPackages":[
         {
