@@ -38,13 +38,13 @@ export default {
     data() {
         return {
             list:[
-                {
+               /*  {
                     type:'card',
                     sort:0,
                     display:1, 
                     title:'优惠购票',
                     icon:'https://newxcx.soofound.cn/vue/upload/static/index/ad-pkgp.png'
-                }
+                } */
             ],
             isShowCard:false       
         }
@@ -70,8 +70,6 @@ export default {
                 return
             }else{
                 let notice = ['航班信息','停航通知','购退票须知']
-
-                console.log(9999,'type',item.type)
                 /* if(notice.includes(item.title)){
                     let url = `/packageNotice/pages/`
 

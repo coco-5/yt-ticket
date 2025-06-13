@@ -129,7 +129,7 @@ export default {
                 {type:'ld',name:'我的增值服务',link:'/packageUser/pages/order/services',ico:'icon-ld'},
                 {type:'sp',name:'商品订单',link:'',ico:'icon-sp'},
                 {type:'ck',name:'乘客',link:'/packageUser/pages/passenger/list',ico:'icon-ck'},
-                {type:'pk',name:'票卡',link:'/packageUser/pages/card/list',ico:'icon-pk'},
+                //{type:'pk',name:'票卡',link:'/packageUser/pages/card/list',ico:'icon-pk'},
 				{type:'vip',name:'会员信息',link:'/packageUser/pages/member/list',ico:'icon-vip'},
             ],
             advertiseList:[],
@@ -241,6 +241,8 @@ export default {
                             avatarWechat:url
                         }).then(()=>{
                             this.ticketMember.avatarWechat = url
+
+                            uni.setStorageSync('ticketMember',this.ticketMember)
                         })
                     }
                     uni.hideLoading()
@@ -318,6 +320,9 @@ export default {
                         nicknameWechat:name
                     }).then(()=>{
                         this.ticketMember.nicknameWechat = name
+
+                        uni.setStorageSync('ticketMember',this.ticketMember)
+
                         this.cbClosePop()    
                     })
                 }).exec()

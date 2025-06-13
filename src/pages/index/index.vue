@@ -40,7 +40,7 @@
         ></c-bottom>
     </view>
 </template>
-
+ 
 <script>
 import book from '@/packageIndex/components/book'
 import cooperate from '@/packageIndex/components/cooperate'
