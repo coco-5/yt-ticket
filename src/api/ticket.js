@@ -120,3 +120,23 @@ export function getAddedValuePageApi(params){
         })
     })
 }
+
+export function getPortLineApi(params){
+    params = Object.assign({}, params)
+
+    return new Promise((resolve, reject)=>{
+        _this.$http.get(`/ticketPort/port/line`,params).then((res)=>{
+            resolve(res)
+        })
+    })
+}
+
+export function getCityListApi(params){
+    params = Object.assign({}, params)
+
+    return new Promise((resolve, reject)=>{
+        _this.$http.get(`/ticketPort/cityList`,params).then((res)=>{
+            resolve(res)
+        })
+    })
+}
