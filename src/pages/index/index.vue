@@ -31,8 +31,8 @@
             ></c-banner>
         </view>
 
-        <!-- 弹窗 -->
-        <ticketPop></ticketPop>
+        <!-- 弹窗 
+        <ticketPop></ticketPop>-->
 
         <c-bottom
             current="0"

@@ -33,7 +33,7 @@
                 >
                     <c-no-content
                         type="box"
-                        title="当前没有符合条件的航班"
+                        :title="msg"
                     ></c-no-content>  
                 </view>
             </div>
@@ -64,7 +64,7 @@
                 >
                     <c-no-content
                         type="box"
-                        title="当前没有符合条件的航班"
+                        :title="msg"
                     ></c-no-content>  
                 </view>
             </div>
@@ -114,6 +114,8 @@ export default {
             showDatePopType:'arrivalDate',
             arrivalDate:'',
             departureDate:'',
+            msg:'数据加载中',
+            isRequest:false,
         }
     },
     onLoad(e){
@@ -158,8 +160,15 @@ export default {
                 voyageId:'',
             }
 
+            this.msg = '数据加载中'
+
+            if(this.isRequest) return
+
+            this.isRequest = true
+
             return new Promise((resolve)=>{
                 getRoundTicketListApi(params).then((res)=>{
+                    this.isRequest = false
                     if(res.data.code == 200){
                         let data = res.data.data
 
@@ -179,6 +188,7 @@ export default {
                         this.listDeparture = data.voyage || []
                         this.listArrival = data.voyageReturn || []
                     }
+                    this.msg = '当前没有符合条件的航班'
                     resolve()
                 })
             })

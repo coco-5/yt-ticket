@@ -86,12 +86,13 @@
         >
             <c-no-content
                 type="file"
-                title="抱歉～当前没有符合条件的航班"
+                :title="msg"
             ></c-no-content>   
 
             <view 
                 class="btn"
                 @click="goHome"
+                v-if="!isRequest"
             >
                 去首页看看吧
             </view> 
@@ -117,6 +118,7 @@ export default {
             list:[],
             dest:{},
             isRequest:false,
+            msg:'数据加载中'
         }
     },
     onLoad(e){
@@ -134,6 +136,8 @@ export default {
                 sailDateReturn:options.sailDateReturn,
                 isRoundTrip:0
             }
+
+            this.msg = '数据加载中'
 
             if(this.isRequest) return
 
@@ -158,6 +162,7 @@ export default {
 
                     this.list = data.voyage || []
                 }
+                this.msg = '抱歉～当前没有符合条件的航班'
             })
         },
         chooseDate(date){
