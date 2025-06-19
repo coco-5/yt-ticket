@@ -69,3 +69,22 @@ export function getMaterialApi(id,params){
     })
 }
 
+export function getGetGrayLevelApi(params){
+    params = Object.assign({}, params)
+
+    return new Promise((resolve, reject)=>{
+        _this.$http.get(`/partner/grayLevel/list`,params).then((res)=>{
+            resolve(res)
+        })
+    })
+}
+
+export function getSetGrayLevelApi(id,params){
+    params = Object.assign({}, params)
+
+    return new Promise((resolve, reject)=>{
+        _this.$http.post(`/partner/grayLevel/update`,params).then((res)=>{
+            resolve(res)
+        })
+    })
+}

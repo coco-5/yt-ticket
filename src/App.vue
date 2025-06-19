@@ -1,5 +1,6 @@
 <script>
     import { smsLoginApi,wxLoginApi } from '@/api/user'
+    import { getGetGrayLevelApi } from '@/api/common'
     /*
     * App.vue在解耦构建的模式种，并不会被执行，这是因为uni项目只是作为一个包被引入到主小程序项目中
     * 主小程序的原生app.js才是入口文件，是否执行uni项目的App.vue是由整个小程序的管理者决定
@@ -18,12 +19,13 @@
             this.smsLogin()
         },
         onShow: function() {
-            
+            this.getGetGrayLevel()  
         },
         onHide: function() {
         },
 		globalData: {
-			test: 'Hello! I am the globalData from App.vue'
+			test: 'Hello! I am the globalData from App.vue',
+            grayLevel:true,
         },
         methods:{
             smsLogin(){
@@ -52,6 +54,11 @@
                         uni.setStorageSync('token',data)
                     } 
                 }) */
+            },
+            getGetGrayLevel(){
+                getGetGrayLevelApi().then((res)=>{
+                    console.log(9999,'res',res)
+                })   
             }
         }
     }
