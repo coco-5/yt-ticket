@@ -16,7 +16,9 @@
         </view>
 
         <view class="cooperate">
-            <cooperate></cooperate>
+            <cooperate
+                :grayLevel="grayLevel"
+            ></cooperate>
         </view>
 
         <view 
@@ -42,10 +44,11 @@
 </template>
  
 <script>
+import baseConfig from '@/configs/baseConfig'
 import book from '@/packageIndex/components/book'
 import cooperate from '@/packageIndex/components/cooperate'
 import ticketPop from '@/packageIndex/components/ticketPop'
-import { getBannerListApi, getAdvertiseListApi } from '@/api/common'
+import { getBannerListApi, getAdvertiseListApi, getGrayLevelApi,getGrayVersionApi } from '@/api/common'
 export default {
     components:{
         book,
@@ -59,6 +62,7 @@ export default {
             bannerIndex:0,
             advertiseList:[],
             advertiseIndex:0,
+            grayLevel:1,
         }
     },
     onLoad(e){
@@ -71,6 +75,7 @@ export default {
             let list = [
                 this.getBannerList(),
                 this.getAdvertiseList(),
+                this.getGrayLevel(),
             ]
 
             Promise.all(list).then(()=>{
@@ -110,6 +115,28 @@ export default {
             utils.clearServices()
 
             uni.removeStorageSync('addedValueList')
+        },
+        getGrayLevel(){
+            let params = {
+                id:1,
+                version:baseConfig.graryVersion,
+            }
+
+            /* getGrayLevelApi(params).then((res)=>{
+                if(res.data.code == 200){
+                    let data = res.data.data
+
+                    this.grayLevel = data
+                }
+            })  */  
+
+            getGrayVersionApi(params).then((res)=>{
+                if(res.data.code == 200){
+                    let data = res.data.data
+
+                    this.grayLevel = data.grayLevel
+                }
+            })
         },
     },
     onShareAppMessage(e){

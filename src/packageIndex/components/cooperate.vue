@@ -35,18 +35,22 @@ export default {
     components:{
         card,
     },
+    props:{
+        grayLevel:{
+            type:[Number,Boolean],
+            default:1,
+        }
+    },
+    watch:{
+        grayLevel:{
+            deep:true,
+            handler(n){}
+        }
+    },
     data() {
         return {
-            list:[
-               /*  {
-                    type:'card',
-                    sort:0,
-                    display:1, 
-                    title:'优惠购票',
-                    icon:'https://newxcx.soofound.cn/vue/upload/static/index/ad-pkgp.png'
-                } */
-            ],
-            isShowCard:false       
+            list:[],
+            isShowCard:false,   
         }
     },
     mounted(){
@@ -57,6 +61,13 @@ export default {
             getPartnerListApi().then(res=>{
                 if(res.data.code == 200){
                     let data = res.data.data || []
+
+                    data.forEach((item)=>{
+                        item.display = true
+                        if(!item.link && !this.grayLevel){
+                            item.display = false
+                        }
+                    })
 
                     this.list = this.list.concat(data)
 
@@ -70,23 +81,6 @@ export default {
                 return
             }else{
                 let notice = ['航班信息','停航通知','购退票须知']
-                /* if(notice.includes(item.title)){
-                    let url = `/packageNotice/pages/`
-
-                    if(item.title == '航班信息'){
-                        url += `flight/flight`  
-                    }else if(item.title == '停航通知'){
-                        url += `stop/stop`
-                    }else if(item.title == '购退票须知'){
-                        url += `refund/refund`
-                    }
-                    
-
-                    uni.navigateTo({
-                        url,
-                    })
-                    return
-                } */
 
                 let url = ``
 

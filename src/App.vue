@@ -1,6 +1,7 @@
 <script>
-    import { smsLoginApi,wxLoginApi } from '@/api/user'
-    import { getGetGrayLevelApi } from '@/api/common'
+    import baseConfig from '@/configs/baseConfig'
+    import { wxLoginApi } from '@/api/user'
+    import { updateSetGrayLevelApi } from '@/api/common'
     /*
     * App.vue在解耦构建的模式种，并不会被执行，这是因为uni项目只是作为一个包被引入到主小程序项目中
     * 主小程序的原生app.js才是入口文件，是否执行uni项目的App.vue是由整个小程序的管理者决定
@@ -19,7 +20,10 @@
             this.smsLogin()
         },
         onShow: function() {
-            this.getGetGrayLevel()  
+            //配置灰度 
+            // //0设置灰度某些功能隐藏 
+            // //1不设置灰度，全开发
+            this.updateGrayLevel(0)
         },
         onHide: function() {
         },
@@ -55,9 +59,15 @@
                     } 
                 }) */
             },
-            getGetGrayLevel(){
-                getGetGrayLevelApi().then((res)=>{
-                    console.log(9999,'res',res)
+            updateGrayLevel(grayLevel){
+                updateSetGrayLevelApi({
+                    id:1,
+                    version:baseConfig.graryVersion,
+                    grayLevel,
+                }).then((res)=>{
+                    if(res.data.code == 200){
+                        let data = res.data.data
+                    }
                 })   
             }
         }

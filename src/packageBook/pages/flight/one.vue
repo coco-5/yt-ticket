@@ -102,7 +102,7 @@
     </view>
 </template>
 
-<script>
+<script> 
 import utils from '@/utils/utils'
 import date from '@/packageBook/components/date'
 import destination from '@/packageBook/components/destination'

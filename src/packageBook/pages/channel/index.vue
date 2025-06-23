@@ -25,7 +25,7 @@
                     :key="i"
                 >
                     <view class="path">
-                        {{path.portLocalVo.portName}}
+                        <view class="ico"></view>{{path.portLocalVo.portName}}
                     </view>
                     <template
                         v-if="path.toPortList && path.toPortList.length"
@@ -34,9 +34,9 @@
                             class="item-path"
                             v-for="(port,portIndex) in path.toPortList"
                             :key="portIndex"
-                            @click="go(path.fromPort,port)"
+                            @click="go(path.fromPort, port)"
                         >
-                            {{path.fromPort.portName}} => {{port.portName}}
+                            {{path.fromPort.portName}} <view class="ico"></view> {{port.portName}}
                         </view>
                     </template>
                 </view>
@@ -47,7 +47,7 @@
 
 <script>
 import utils from '@/utils/utils'
-import { getCityListApi, getPortLineApi} from '@/api/ticket'
+import { getCityListApi } from '@/api/ticket'
 export default {
     data(){
         return{
@@ -74,7 +74,6 @@ export default {
         getList(){
             let list = [
                 this.getCityList(),
-                this.getPortLine(),
             ]
 
             Promise.all(list)
@@ -92,18 +91,15 @@ export default {
                 })
             })
         },
-        getPortLine(){
-            return new Promise((resolve)=>{
-                getPortLineApi().then((res)=>{
-                    resolve()
-                })
-            })
-        },
         change(index){
             this.cityIndex = index
         },
         go(from,to){
+            let item = this.city[this.cityIndex]
+            //cityCode
             let query = {
+                formCityCode:item.cityCode,
+                toCityCode:item.cityCode,
                 fromPortCode:from.portCode,
                 toPortCode:to.portCode,
                 sailDate:this.sailDate,
@@ -111,7 +107,7 @@ export default {
                 isRoundTrip:0,
             }
 
-            let url = `/packageBook/pages/flight/one?${utils.paramsStringify(query)}`
+            let url = `/packageBook/pages/channel/list?${utils.paramsStringify(query)}`
 
             uni.navigateTo({
                 url,
@@ -170,10 +166,28 @@ export default {
             .path {
                 height:100rpx;
                 font-weight:500;
+                .ico {
+                    display:inline-block;
+                    margin-right:8rpx;
+                    width:40rpx;
+                    height:40rpx;
+                    background:url('https://newxcx.soofound.cn/vue/upload/static/common/WechatIMG4101.png') no-repeat;
+                    background-size:contain;
+                    vertical-align:middle;
+                }
             }
             .item-path {
                 height:100rpx;
                 border-bottom:1px solid #F9F9F9;
+                .ico {
+                    display:inline-block;
+                    margin:0 8rpx;
+                    width:40rpx;
+                    height:40rpx;
+                    background:url('https://newxcx.soofound.cn/vue/upload/static/common/WechatIMG4100.png') no-repeat;
+                    background-size:contain;
+                    vertical-align:sub;
+                }
             }
         }
     }
