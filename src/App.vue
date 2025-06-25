@@ -22,8 +22,8 @@
         onShow: function() {
             //配置灰度 
             // //0设置灰度某些功能隐藏 
-            // //1不设置灰度，全开发
-            this.updateGrayLevel(0)
+            // //1不设置灰度，全开放
+            //this.updateGrayLevel(1)
         },
         onHide: function() {
         },
