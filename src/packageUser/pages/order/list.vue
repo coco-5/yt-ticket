@@ -203,7 +203,7 @@ export default{
         getOrderList(){
             let listObj = this.allList[`type-`+this.tabIndex]
             let params = {
-                channel:1
+                channel:4,
             }
 
             if(listObj.isRequest) return

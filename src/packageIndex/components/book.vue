@@ -160,15 +160,31 @@ export default {
             showDatePopType:'',
             departureDate:'',
             arrivalDate:'',
+            timer:null,
+            time:500,
         }
     },
     mounted(){
-        this.getList()
+        this.checkToken()
+
         this.initTodayDate()
         this.initArrivalDate()
     },
+    destroyed(){
+        clearInterval(this.timer)
+    },
     methods:{
         timeFormat:utils.timeFormat,
+        checkToken(){
+            this.timer = setInterval(()=>{
+                let token = uni.getStorageSync('token') 
+                if(token){
+                    this.getList()
+                    clearInterval(this.timer)
+                    return
+                }
+            },this.time)
+        },
         getList(){
             let list = [
                 this.getPortRoute()

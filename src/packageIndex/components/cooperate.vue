@@ -50,13 +50,28 @@ export default {
     data() {
         return {
             list:[],
-            isShowCard:false,   
+            isShowCard:false, 
+            timer:null,
+            time:500,  
         }
     },
     mounted(){
-        this.getPartnerList()
+        this.checkToken()
+    },
+    destroyed(){
+        clearInterval(this.timer)
     },
     methods: {
+        checkToken(){
+            this.timer = setInterval(()=>{
+                let token = uni.getStorageSync('token') 
+                if(token){
+                    this.getPartnerList()
+                    clearInterval(this.timer)
+                    return
+                }
+            },this.time)
+        },
         getPartnerList(){
             getPartnerListApi().then(res=>{
                 if(res.data.code == 200){

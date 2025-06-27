@@ -91,15 +91,18 @@ export default {
                 getRuleApi(params).then((res)=>{
                     if(res.data.code == 200){
                         let data = res.data.data || {}
+                        let rule = []
 
                         for(let p in data){
-
-                            for(let i=0; i<ruleList.length; i++){
-                                if(p == ruleList[i].name){
-                                    ruleList[i].desc = data[p]
-                                }
+                            if(p == 'ticketRule'){
+                                let a = data[p]
+                                rule = this.splitLiElements(a)[0] || []
                             }
-                        }   
+                        }
+
+                        ruleList[0].desc = rule[0]
+                        ruleList[1].desc = rule[1]
+                        ruleList[2].desc = rule[2] 
                     }
                     resolve()
                 })
@@ -110,6 +113,17 @@ export default {
         },
         changeIndex(index){
             this.$emit('cbChangeIndex',index)
+        },
+        splitLiElements(htmlString){
+            const liElements = htmlString.match(/<li>.*?<\/li>/g) || []
+            const result = []
+            const itemsPerArray = 3
+  
+            for (let i = 0; i < liElements.length; i += itemsPerArray){
+                result.push(liElements.slice(i, i + itemsPerArray))
+            }
+  
+            return result
         }
     }
 }

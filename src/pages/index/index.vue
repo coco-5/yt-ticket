@@ -63,14 +63,26 @@ export default {
             advertiseList:[],
             advertiseIndex:0,
             grayLevel:1,
+            timer:null,
+            time:500,
         }
     },
     onLoad(e){
         this.options = e
 
-        this.getList()
+        this.checkToken()
     },
     methods:{
+        checkToken(){
+            this.timer = setInterval(()=>{
+                let token = uni.getStorageSync('token') 
+                if(token){
+                    this.getList()
+                    clearInterval(this.timer)
+                    return
+                }
+            },this.time)
+        },
         getList(){
             let list = [
                 this.getBannerList(),
