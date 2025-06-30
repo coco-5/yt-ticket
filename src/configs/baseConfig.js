@@ -1,7 +1,7 @@
 let baseConfig = {
     appid : 'AP001',
-    version : '1.0.2',
-    graryVersion:'1.0.2',
+    version : '1.0.5',
+    graryVersion:'1.0.5',
     pageSize : 20,
     appName : 'tiku_pro',
     proxyApi:{

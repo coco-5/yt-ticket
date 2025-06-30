@@ -150,7 +150,15 @@
             v-if="orderDetail.status == 4 || orderDetail.status == 1 || orderDetail.status == 6"
             @click="handleExpense"
         >
-            报销凭证
+            在线查看报销凭证
+        </view>
+
+        <view
+            class="expense-btn"
+            v-if="orderDetail.status == 4 || orderDetail.status == 1 || orderDetail.status == 6"
+            @click="copyExpense"
+        >
+            复制报销凭证文件地址
         </view>
 
         <view class="actions">
@@ -231,7 +239,8 @@ export default {
             ticketIndex:0,
             loading:false,
             isShowCode:false,
-            codeItem:''
+            codeItem:'',
+            expenselPath:'',
         }
     },
     onLoad(e){
@@ -302,6 +311,8 @@ export default {
 
                         this.setCode()
                     }
+
+                    this.getOrderExpensel()
                     resolve()
                 })
             })
@@ -331,29 +342,48 @@ export default {
                 this.getOrderDetail()
             }
         },
-        handleExpense(){
-            uni.showLoading()
+        getOrderExpensel(){
+            return new Promise((reslove)=>{
+                getOrderExpenselApi(this.orderDetail.id,{}).then((res)=>{
+                    uni.hideLoading()
+                    if(res.data.code == 200){
+                        let data = res.data.data
 
-            getOrderExpenselApi(this.orderDetail.id,{}).then((res)=>{
-                uni.hideLoading()
-                if(res.data.code == 200){
-                    let data = res.data.data
-
-                    if(data){
-                        uni.downloadFile({
-                            url:data.replace('http://', 'https://'),
-                            success:(res)=>{
-                                if(res.statusCode == 200){
-                                    const filePath = res.tempFilePath
-                                    
-                                    uni.openDocument({
-                                        filePath,  
-                                        fileType:'xlsx'   
-                                    })
-                                }
-                            }
-                        })
+                        this.expenselPath = data || ''
                     }
+                })
+
+            })
+        },
+        handleExpense(){
+            if(this.expenselPath){
+                let data = this.expenselPath
+                uni.downloadFile({
+                    url:data.replace('http://', 'https://'),
+                    success:(res)=>{
+                        if(res.statusCode == 200){
+                            const filePath = res.tempFilePath
+                            
+                            uni.openDocument({
+                                filePath,  
+                                fileType:'xlsx'   
+                            })
+                        }
+                    }
+                })
+            }
+        },
+        copyExpense(){
+            uni.setClipboardData({
+                data:this.expenselPath,
+                success:res=>{
+                    uni.hideToast()
+                    uni.showModal({
+                        title:'复制成功',
+                        content:'报销凭证文件地址已复制到剪切板，请打开浏览器下载。',
+                        showCancel:false,
+                        confirmText:'知道了',
+                    })
                 }
             })
         },

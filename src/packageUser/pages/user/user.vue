@@ -48,6 +48,7 @@
                 @click="go(item)"
                 v-for="(item,index) in list"
                 :key="index"
+                v-if="item.isShow"
             >
                 <image :src="'https://newxcx.soofound.cn/vue/upload/static/my/'+item.ico+'.png'"/>
                 <view class="name">{{item.name}}</view>
@@ -117,7 +118,8 @@
 
 <script>
 import utils from '@/utils/utils'
-import { getAdvertiseListApi } from '@/api/common'
+import baseConfig from '@/configs/baseConfig'
+import { getAdvertiseListApi,getGrayVersionApi } from '@/api/common'
 import { memberUpdateApi } from '@/api/passenger'
 import { getBaseInfoApi } from '@/api/member'
 export default {
@@ -125,12 +127,12 @@ export default {
         return{
             options:{},
             list:[
-                {type:'ld',name:'轮渡订单',link:'/packageUser/pages/order/list',ico:'icon-ld'},
-                {type:'ld',name:'我的增值服务',link:'/packageUser/pages/order/services',ico:'icon-ld'},
-                {type:'sp',name:'商品订单',link:'',ico:'icon-sp'},
-                {type:'ck',name:'乘客',link:'/packageUser/pages/passenger/list',ico:'icon-ck'},
+                {type:'ld',name:'轮渡订单',link:'/packageUser/pages/order/list',ico:'icon-ld',isShow:true},
+                {type:'ld',name:'我的增值服务',link:'/packageUser/pages/order/services',ico:'icon-ld',isShow:true},
+                {type:'sp',name:'商品订单',link:'',ico:'icon-sp',isShow:true},
+                {type:'ck',name:'乘客',link:'/packageUser/pages/passenger/list',ico:'icon-ck',isShow:true},
                 //{type:'pk',name:'票卡',link:'/packageUser/pages/card/list',ico:'icon-pk'},
-				{type:'vip',name:'会员信息',link:'/packageUser/pages/member/list',ico:'icon-vip'},
+				{type:'vip',name:'会员信息',link:'/packageUser/pages/member/list',ico:'icon-vip',isShow:true},
             ],
             advertiseList:[],
             advertiseIndex:0,
@@ -139,7 +141,8 @@ export default {
             baseInfo:{},
             isShowEditName:false,
             bottomStyle:'',
-            name:'',
+            name:'', 
+            grayLevel:1,
         }
     },
     onLoad(e) {
@@ -173,7 +176,8 @@ export default {
         getList(){
             let list = [
                 this.getBaseInfo(),
-                this.getAdvertiseList()
+                this.getAdvertiseList(),
+                this.getGrayLevel(),
             ]
 
             Promise.all(list).then(()=>{
@@ -199,6 +203,30 @@ export default {
                 if(res.data.code == 200){
                     let data = res.data.data || []
                     this.advertiseList = data
+                }
+            })
+        },
+        getGrayLevel(){
+            let params = {
+                id:1,
+                version:baseConfig.graryVersion,
+            } 
+
+            getGrayVersionApi(params).then((res)=>{
+                if(res.data.code == 200){
+                    let data = res.data.data
+
+                    this.grayLevel = data.grayLevel
+
+                    //this.grayLevel = 1
+
+                    if(this.grayLevel == 0){
+                        this.list.forEach((item)=>{
+                            if(item.type == 'sp'){
+                                item.isShow = false
+                            }
+                        })
+                    }
                 }
             })
         },

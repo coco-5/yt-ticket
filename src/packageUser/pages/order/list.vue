@@ -296,7 +296,7 @@ export default{
                 content:'确认取消订单吗？',
                 success:(res)=>{
                     if(res.confirm){
-                        this.orderDelete(item)
+                        this.cancelOrder(item)
                     }
                 }
             })

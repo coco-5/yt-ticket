@@ -37,8 +37,11 @@ export default {
 
                     data.content = utils.replaceHTMLChar(data.content)
                     data.content = this.formatImg(data.content)
+                    data.content = this.formatTable(data.content)
+                    data.content = this.formatTd(data.content)
                     this.content = data || {}
                     
+                    console.log(999,'公告详情',this.content.content)
                 }
             })
         },
@@ -46,6 +49,22 @@ export default {
             var newContent = html.replace(/<img[^>]*>/gi, function (match, capture) {
                 var match = match.replace(/style=\"(.*)\"/gi, 'style="width:100%;height:auto" ');
                 match = match.replace(/\<img /gi, '<img style="width:100%;height:auto" ');
+                return match;
+            });
+            return newContent;
+        },
+        formatTable(html) {
+            var newContent = html.replace(/<table[^>]*>/gi, function (match, capture) {
+                var match = match.replace(/style=\"(.*)\"/gi, 'style="width: 100%!important; cellspacing:0!important; cellpadding: 0;!imporatnt;border-collapse:collapse"');
+                match = match.replace(/\<table /gi, '<table style=""');
+                return match;
+            });
+            return newContent;
+        },
+        formatTd(html) {
+            var newContent = html.replace(/<td[^>]*>/gi, function (match, capture) {
+                var match = match.replace(/style=\"(.*)\"/gi, 'style="margin:0!imporatant;padding:8px;border: #999 1px solid;"');
+                match = match.replace(/\<td /gi, '<td style=""');
                 return match;
             });
             return newContent;
