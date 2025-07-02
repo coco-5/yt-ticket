@@ -78,14 +78,14 @@
                         v-if="item.price5 && Number(item.price5) > 0"
                     >
                         <text class="t1">RMB</text>
-                        <text class="t2">{{item.price5}}</text>
+                        <text class="t2">{{double * Number(item.price5)}}</text>
                     </view>
                 </view>
                 <view 
                     class="btn"
                     @click="book(item)"
                 >
-                    预定
+                    预定 
                 </view>
             </view>
         </view>
@@ -138,11 +138,15 @@ export default {
             listSpace:[],
             isShoPop:false,
             detail:'',
-            tripList:[]
+            tripList:[],
+            double:1,
         }
     },
     onLoad(e){
         this.options = e
+
+
+        this.double = Number(this.options.isRoundTrip) ? 2 : 1
 
         this.getList()
     },

@@ -74,7 +74,7 @@
                         <view 
                             class="btn" 
                             :data-item="item"
-                            @click.stop="refundOrder"
+                            @click.stop="checkOrder"
                             >
                             退票
                         </view>
@@ -120,7 +120,7 @@
 import utils from '@/utils/utils'
 import order from '@/types/order'
 import { getAdvertiseListApi } from '@/api/common'
-import { getOrderListApi, getOrderDeleteApi, getOrderCancelApi } from '@/api/order'
+import { getOrderListApi, getOrderDeleteApi, getOrderCancelApi,checkRefundApi, refundOrderApi } from '@/api/order'
 export default{
     data(){
         return{
@@ -326,8 +326,50 @@ export default{
                 url
             })
         },
-        refundOrder(e){
+        checkOrder(e){
+            if(this.loading) return
 
+            let item = e.target.dataset.item
+
+            this.loading = true
+
+            uni.showLoading()
+
+            checkRefundApi(item.id,{}).then((res)=>{
+                uni.hideLoading()
+                this.loading = false
+
+                if(res.data.code == 200){
+                    let data = res.data.data
+
+                    const unit = item.currencyType == 1 ? 'MOP' : 'RMB'
+
+                    uni.showModal({
+                        title:'退票提示',
+                        content:`本次退票收取手续费${data.serviceFee}${unit}，退款金额为${data.refundMoney}${unit}，确定退票吗？ `,
+                        success:(res)=>{
+                            if(res.confirm){
+                                this.refundOrder(item)
+                            }
+                        }
+                    })
+                }
+            })
+        },
+        refundOrder(item){
+            if(this.loading) return
+
+            this.loading = true
+
+            uni.showLoading()
+
+            refundOrderApi(item.id,{}).then((res)=>{
+                uni.hideLoading()
+                this.loading = false
+                if(res.data.code == 200){
+                    this.reloadList()
+                }
+            })
         },
         handleCode(e){
             let item = e.currentTarget.dataset.item

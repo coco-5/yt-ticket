@@ -1161,7 +1161,11 @@ export default {
                 &.mop {
                     background:linear-gradient(87deg, #FFA63F, #EB5628);
                     border-radius:0 45rpx 45rpx 0;
-                    color:#FFF;
+                    color:#FFF!important;
+                    .price,
+                    .t {
+                        color:#FFF!important;
+                    }
                 }
             }
             &.btn-mop {
