@@ -1,5 +1,8 @@
 <template>
-    <view class="c-cooperate">
+    <view 
+        class="c-cooperate"
+        v-if="grayLevel"
+    >
         <view 
             class="item"
             @click="go(item)"

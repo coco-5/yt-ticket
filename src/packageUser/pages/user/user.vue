@@ -129,7 +129,7 @@ export default {
             list:[
                 {type:'ld',name:'轮渡订单',link:'/packageUser/pages/order/list',ico:'icon-ld',isShow:true},
                 {type:'ld',name:'我的增值服务',link:'/packageUser/pages/order/services',ico:'icon-ld',isShow:true},
-                {type:'sp',name:'商品订单',link:'',ico:'icon-sp',isShow:true},
+                {type:'sp',name:'商品订单',link:'',ico:'icon-sp',isShow:false},
                 {type:'ck',name:'乘客',link:'/packageUser/pages/passenger/list',ico:'icon-ck',isShow:true},
                 //{type:'pk',name:'票卡',link:'/packageUser/pages/card/list',ico:'icon-pk'},
 				{type:'vip',name:'会员信息',link:'/packageUser/pages/member/list',ico:'icon-vip',isShow:true},
@@ -220,10 +220,10 @@ export default {
 
                     //this.grayLevel = 1
 
-                    if(this.grayLevel == 0){
+                    if(this.grayLevel == 1){
                         this.list.forEach((item)=>{
                             if(item.type == 'sp'){
-                                item.isShow = false
+                                item.isShow = true
                             }
                         })
                     }

@@ -1,58 +1,65 @@
 <template>
     <view class="page">
-        <view class="sidebar">
-            <view class="header">出发城市</view>
-            <view 
-                class="item"
-                :class="cityIndex == index ? 'active' : ''"
-                v-for="(item,index) in city"
-                :key="index"
-                @click="change(index)"
-            >
-                {{item.cityName}}
-            </view>
-        </view>
-        <view class="content">
-            <view class="header">
-                {{city[cityIndex].cityName}}有 <text>{{city[cityIndex].portCount}}</text>码头
-            </view>
-            <template
-                v-if="city[cityIndex].tickPaths.length"   
-            >
+        <telemplate v-if="grayLevel">
+            <view class="sidebar">
+                <view class="header">出发城市</view>
                 <view 
                     class="item"
-                    v-for="(path,i) in city[cityIndex].tickPaths"
-                    :key="i"
+                    :class="cityIndex == index ? 'active' : ''"
+                    v-for="(item,index) in city"
+                    :key="index"
+                    @click="change(index)"
                 >
-                    <view class="path">
-                        <view class="ico"></view>{{path.portLocalVo.portName}}
-                    </view>
-                    <template
-                        v-if="path.toPortList && path.toPortList.length"
-                    >
-                        <view 
-                            class="item-path"
-                            v-for="(port,portIndex) in path.toPortList"
-                            :key="portIndex"
-                            @click="go(path.fromPort, port)"
-                        >
-                            {{path.fromPort.portName}} <view class="ico"></view> {{port.portName}}
-                        </view>
-                    </template>
+                    {{item.cityName}}
                 </view>
-            </template>
-        </view>
+            </view>
+            <view class="content">
+                <view class="header">
+                    {{city[cityIndex].cityName}}有 <text>{{city[cityIndex].portCount}}</text>码头
+                </view>
+                <template
+                    v-if="city[cityIndex].tickPaths.length"   
+                >
+                    <view 
+                        class="item"
+                        v-for="(path,i) in city[cityIndex].tickPaths"
+                        :key="i"
+                    >
+                        <view class="path">
+                            <view class="ico"></view>{{path.portLocalVo.portName}}
+                        </view>
+                        <template
+                            v-if="path.toPortList && path.toPortList.length"
+                        >
+                            <view 
+                                class="item-path"
+                                v-for="(port,portIndex) in path.toPortList"
+                                :key="portIndex"
+                                @click="go(path.fromPort, port)"
+                            >
+                                {{path.fromPort.portName}} <view class="ico"></view> {{port.portName}}
+                            </view>
+                        </template>
+                    </view>
+                </template>
+            </view>
+        </telemplate>
+
+        <template v-else>功能升级中，敬请期待</template>
     </view>
 </template>
 
 <script>
+import baseConfig from '@/configs/baseConfig'
 import utils from '@/utils/utils'
 import { getCityListApi } from '@/api/ticket'
+import {getGrayVersionApi } from '@/api/common'
 export default {
     data(){
         return{
             city:[],
             cityIndex:0,
+            grayLevel:1,
         }
     },
     onLoad(e){
@@ -74,6 +81,7 @@ export default {
         getList(){
             let list = [
                 this.getCityList(),
+                this.getGrayLevel(),
             ]
 
             Promise.all(list)
@@ -89,6 +97,20 @@ export default {
                         resolve()
                     }
                 })
+            })
+        },
+        getGrayLevel(){
+            let params = {
+                id:1,
+                version:baseConfig.graryVersion,
+            } 
+
+            getGrayVersionApi(params).then((res)=>{
+                if(res.data.code == 200){
+                    let data = res.data.data
+
+                    this.grayLevel = data.grayLevel
+                }
             })
         },
         change(index){

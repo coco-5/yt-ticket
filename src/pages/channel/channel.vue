@@ -1,6 +1,6 @@
 <template>
     <view class="page">
-        
+        <template v-if="grayLevel"></template>
         <view class="sidebar">
             <view class="header">出发城市</view>
             <view 
@@ -47,18 +47,22 @@
 </template>
 
 <script>
+import baseConfig from '@/configs/baseConfig'
 import utils from '@/utils/utils'
 import { getCityListApi, getPortLineApi} from '@/api/ticket'
+import {getGrayVersionApi } from '@/api/common'
 export default {
     data(){
         return{
             city:[],
             cityIndex:0,
+            grayLevel:1,
         }
     },
     onLoad(e){
         this.options = e
 
+        console.log(9999,111)
         this.initTodayDate()
 
         this.getList()
@@ -76,6 +80,7 @@ export default {
             let list = [
                 this.getCityList(),
                 this.getPortLine(),
+                this.getGrayLevel(),
             ]
 
             Promise.all(list)
@@ -98,6 +103,20 @@ export default {
                 getPortLineApi().then((res)=>{
                     resolve()
                 })
+            })
+        },
+        getGrayLevel(){
+            let params = {
+                id:1,
+                version:baseConfig.graryVersion,
+            } 
+
+            getGrayVersionApi(params).then((res)=>{
+                if(res.data.code == 200){
+                    let data = res.data.data
+
+                    this.grayLevel = data.grayLevel
+                }
             })
         },
         change(index){

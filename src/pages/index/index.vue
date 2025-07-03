@@ -42,7 +42,7 @@
         ></c-bottom>
     </view>
 </template>
- 
+  
 <script>
 import baseConfig from '@/configs/baseConfig'
 import book from '@/packageIndex/components/book'

@@ -287,12 +287,34 @@ export default {
             this.tabType = item.type
         },
         cbConfirmDate(date){
+            if(this.tabType == 'round'){
+                let date1 = 0
+                let date2 = 0
+
+                //出发日期需要小于到达日期
+                if(this.showDatePopType == 'departureDate'){
+                    //出发时间
+                    date1 = new Date(date).getTime()
+                    date2 = new Date(this.arrivalDate).getTime()
+                }else{
+                    //到达时间
+                    date2 = new Date(date).getTime()
+                    date1 = new Date(this.departureDate).getTime()
+                }     
+
+                if(date1 > date2){
+                    uni.showToast({
+                        title:'出发时间不能大于到达时间',
+                        icon:'none'
+                    })
+                    return
+                }
+            }
             if(this.showDatePopType == 'arrivalDate'){
                 this.arrivalDate = date
             }else{
                 this.departureDate = date
             }  
-            
             this.cbCloseDatePop()
         },
         showDestPop(item){

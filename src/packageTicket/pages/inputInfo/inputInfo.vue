@@ -249,6 +249,7 @@ export default {
             isShoPop:false,
             ruleIndex:0,
             needLogin:true,
+            isSubmit:false,
         }
     },
     onLoad(e){
@@ -594,6 +595,19 @@ export default {
                 return
             }
 
+            if(this.isSubmit){
+                uni.showToast({
+                    title:'请勿重复提交',
+                    icon:'none'
+                })
+                return
+            }
+
+            this.isSubmit = true
+            
+            uni.showLoading()
+            //isSubmit
+
             let options = this.options
             let addedValueList = []
             let addedValue = utils.checkSerivces(this.options,'addedValue')
@@ -654,6 +668,8 @@ export default {
             }
 
             getOrderSubmitApi(params).then((res)=>{
+                uni.hideLoading()
+                this.isSubmit = false
                 if(res.data.code == 200){
                     let data = res.data.data
 
