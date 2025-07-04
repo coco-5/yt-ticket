@@ -605,7 +605,9 @@ export default {
 
             this.isSubmit = true
             
-            uni.showLoading()
+            uni.showLoading({
+                title:'提交订单中...',
+            })
             //isSubmit
 
             let options = this.options
